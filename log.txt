@@ -1,0 +1,1 @@
+Lolo (0210): He creado las apps "contact_app" y "uni_app", registrado en cosmos/settings.py, creado los modelos (básicos) de uni_app/models.py, y registrados en uni_app/admin.py (user: root; pass: toor)
