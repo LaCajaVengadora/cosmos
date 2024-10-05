@@ -37,7 +37,7 @@ Si les da algún error de git, puede que tengan que ejecutar (al menos la primer
 `>>> git config user.name "Valen_Local"; git config user.email "valucomvaz@gmail.com"`
 
 ## *LA PRÓXIMA VEZ* que quieran editar el proyecto, los pasos serían:
-1. Activar el venv con `>>>cd PROJECT/280924/myenv/Scripts; activate; cd ../..`
+1. Activar el venv con `>>>cd PROJECT/myenv/Scripts; activate; cd ../..`
 2. En el dir 280924 ejecutar `(myenv) >>> git pull origin main`
 3. Hacer todos los cambios que quieran
 4. Ejecutar `(myenv) >>> git commit -am "Descripción de los cambios"; git push origin main`

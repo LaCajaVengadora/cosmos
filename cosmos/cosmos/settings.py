@@ -56,7 +56,7 @@ ROOT_URLCONF = 'cosmos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['uni_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +123,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'; EMAIL_USE_TLS = True; EMAIL_PORT = 587
+EMAIL_HOST_USER='schrodingernoreply@gmail.com'; EMAIL_HOST_PASSWORD='svya dujl eega xmjm'

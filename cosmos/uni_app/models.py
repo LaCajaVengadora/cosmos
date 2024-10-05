@@ -10,7 +10,7 @@ class Cat(models.Model):
                 message='El formato de color debe ser #RRGGBB (hexadecimal).',
             )], help_text="Color debe ser hexadecimal (ejemplo: #FF5733)."
     )
-    def __str__(self): return f"Categoría {self.name}"
+    def __str__(self): return f"{self.name}"
     class Meta:
         verbose_name="Categoría"; verbose_name_plural="Categorías"
 
