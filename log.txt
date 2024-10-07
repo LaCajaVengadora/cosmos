@@ -1,4 +1,6 @@
 - Lolo (0210): He creado las apps "contact_app" y "uni_app", registrado en cosmos/settings.py, creado los modelos (básicos) de uni_app/models.py, y registrados en uni_app/admin.py (user: root; pass: toor)
 
 - Lolo (0410): He añadido uni_app/templates y creado templates para home y búsqueda por universidades y carreras, además de añadir sus url y configurar las views para su correcto funcionamiento
-TODO: Añadir comentarios para ayudar a comprender los avances del proyecto - Crear búsqueda por palabras en un cuadro de búsqueda (combinado con el filtro?) - Se deben unificar los templates de home y search? Probablemente no
+
+- Lolo (0710): He creado el filtro por búsqueda y comentado partes del proyecto
+TODO: idk, fijarse la guía en papel, consultar? 

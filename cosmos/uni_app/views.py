@@ -6,29 +6,39 @@ from django.db.models import Q
 # Create your views here.
 def testView(request): return render(request, "test.html", {})
 
-'''
-HOME
-- SEARCHER (CATS, CARRERAS & UNIS) => SEARCH PAGE (VIEW)
-
-'''
 def home_view(request):
-    ctx = {"unis":Uni.objects.all(), "cats":Cat.objects.all(), "carreras":Carrera.objects.all()}
-    return render(request, "home.html", ctx)
 
-def search_view(request, type, id):
-    if type=="cat": 
-        filter = Cat.objects.get(id=id)
-        carreras = Carrera.objects.filter(cat=filter)
-    elif type=="uni": 
-        filter = Uni.objects.get(id=id)
-        carreras = Carrera.objects.filter(uni=filter)
+    query = request.GET.get('q') # GET query IF ANY BY PARAM q
+    carreras = Carrera.objects.all() # GET ALL ITEMS ON Carrera
+    ctx = {"unis" : Uni.objects.all(), "cats" : Cat.objects.all(), "carreras" : carreras}
+    # ↑ SAME WITH Uni & Cat; MAKE ctx DICTIONARY WITH ALL
+    
+    if query: # IF THERE WAS query
+        carreras = carreras.filter( # FILTER carreras BY CONTAINING query ON FIELDS id, desc & name
+            Q(id__icontains=query) | Q(desc__icontains=query) | Q(name__icontains=query)
+        )
+        ctx["carreras"], ctx["filter"] = carreras, f"'{query}'" # UPDATE ctx DICTIONARY & ADD filter KEY-VALUE
+        return render(request, "filter.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
+    
+    return render(request, "home.html", ctx) # IF NOT query, RENDER home.html TEMPLATE WITH ctx
+
+
+def filter_view(request, type, id): # GET type & id FROM URL
+
+    if type=="cat": # IF FILTER type IS cat, GET Cat BY id & FILTER Carrera WITH THAT Cat
+        filter = Cat.objects.get(id=id); carreras = Carrera.objects.filter(cat=filter)
+    elif type=="uni": # ↑ SAME
+        filter = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=filter)
+
     ctx = {"unis":Uni.objects.all(),"cats":Cat.objects.all(), 
-           "carreras":carreras, "filter":filter}
-    return render(request, "search.html", ctx)
+           "carreras":carreras, "filter":filter.name}
+    
+    return render(request, "filter.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 
-#def home_filtered_view(request): return get_data(request);
 
-'''def get_data(request, cat=None):
+
+''' ---------------------- ↓ IGNORE THIS BUT DO NOOOOT DELETE!!!! ↓ -----------------------
+def get_data(request, cat=None):
     query = request.GET.get('q'); raw_items = Carrera.objects.all()
 
     if cat: raw_items = raw_items.filter(category__name=cat)

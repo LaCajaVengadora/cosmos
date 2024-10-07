@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('uni_app.urls'))
+    path('', include('uni_app.urls')) # REGISTER uni_app.urls BY PATH '' (i.g., ROOT)
 ]
