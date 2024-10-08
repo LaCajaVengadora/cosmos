@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>                              <!-- GETS FROM ctx: unis, cats & carreras -->
+{% extends "base.html" %}{% block title %}Home{% endblock %}
+{% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
 
     <h1>HOME</h1> <br>
 
-    <form role="search" method="GET" action="{% url 'main:home' %}">
-        <button type="submit">SEARCH</button>                       <!-- SEARCHES BY q ON home -->
-        <input type="search" name="q" placeholder="Buscar...">
-    </form>
-
-    <h3>FILTER BY:</h3>
-    <p>CATS: {% for i in cats %} <a href="{% url 'main:filter' 'cat' i.id %}">{{i.name}}</a>{% endfor %}</p>
-    <p>UNIS: {% for i in unis %} <a href="{% url 'main:filter' 'uni' i.id %}">{{i.name}}</a>{% endfor %}</p>
+    <h3>FILTRAR POR:</h3>
+    <p>Categorías: {% for i in cats %} <a href="{% url 'main:filter' 'cat' i.id %}">{{i.name}}</a>{% endfor %}</p>
+    <p>Universidades: {% for i in unis %} <a href="{% url 'main:filter' 'uni' i.id %}">{{i.name}}</a>{% endfor %}</p>
     <!-- SHOWS ALL unis & cats AVAILABLE; IF CLICK, GOES TO filter URL WITH TYPE OF FILTER & ID -->
     
     <h2>CARRERAS:</h2>                                              <!--SHOWS ALL carreras -->
     <ul>{% for i in carreras %}<li>{{i}}</li>{% endfor %}</ul>
-    <h1>Hola mundo</h1>
 
-</body>
-</html>
+{% endblock %}
