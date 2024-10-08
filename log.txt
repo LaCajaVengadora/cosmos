@@ -3,4 +3,6 @@
 - Lolo (0410): He añadido uni_app/templates y creado templates para home y búsqueda por universidades y carreras, además de añadir sus url y configurar las views para su correcto funcionamiento
 
 - Lolo (0710): He creado el filtro por búsqueda y comentado partes del proyecto
-TODO: idk, fijarse la guía en papel, consultar? 
+
+- Lolo (0810): Modularizado los templates, dividiendos en 'parent_templates': topbar, footer & base (base hereda de los otros) y cada otro template hereda de base. Also, add archivos de Bootstrap y CSS propios
+TODO: Página de cada universidad y carrera (y categoría?) y comparador de carreras (shit)

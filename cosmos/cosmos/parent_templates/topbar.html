@@ -1,0 +1,16 @@
+
+<nav class="nav navbar bg-dark justify-content-between align-items-center container-fluid text-light px-2" 
+        style="position: fixed; top: 0; width: 100%; z-index: 1;">
+
+    <div>
+        <a href="{% url 'main:home' %}" class="nav-link text-secondary">COSMOS</a>
+    </div>
+
+    <div>
+        <form class="input-group" role="search" method="GET" action="{% url 'main:home' %}">
+            <button class="btn btn-primary input-group-text" type="submit" id="search-addon"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input class="form-control" type="search" name="q" placeholder="Buscar..." aria-label="Search" aria-describedby="search-addon">
+        </form>
+    </div>
+    
+</nav>

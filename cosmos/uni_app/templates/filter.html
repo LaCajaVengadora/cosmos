@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search by...</title>
-</head>
-<body>                              <!-- GETS FROM ctx: unis, cats, carreras & filter -->
+{% extends "base.html" %}{% block title %}Search by...{% endblock %}
+{% block content %}                                <!-- GETS FROM ctx: unis, cats, carreras & filter -->
 
-    <h1>SEARCHING BY {{filter}}</h1>                                <!-- SHOWS filter -->
+    <h1>RESULTADOS PARA {{filter}}</h1>                                <!-- SHOWS filter -->
 
-    <form role="search" method="GET" action="{% url 'main:home' %}">
-        <button type="submit">SEARCH</button>                       <!-- SEARCHES BY q ON home -->
-        <input type="search" name="q" placeholder="Buscar...">
-    </form>
+    <h4><a href="{% url 'main:home' %}">LIMPIAR FILTROS</a></h4>      <!-- GOES TO home -->
 
-    <h4><a href="{% url 'main:home' %}">CLEAN FILTERS</a></h4>      <!-- GOES TO home -->
-
-    <h3>FILTER BY:</h3>
-    <p>CATS: {% for i in cats %} <a href="{% url 'main:filter' 'cat' i.id %}">{{i.name}}</a>{% endfor %}</p>
-    <p>UNIS: {% for i in unis %} <a href="{% url 'main:filter' 'uni' i.id %}">{{i.name}}</a>{% endfor %}</p>
+    <h3 class="test">FILTRAR POR:</h3>
+    <p>Categorías: {% for i in cats %} <a href="{% url 'main:filter' 'cat' i.id %}">{{i.name}}</a>{% endfor %}</p>
+    <p>Universidades: {% for i in unis %} <a href="{% url 'main:filter' 'uni' i.id %}">{{i.name}}</a>{% endfor %}</p>
     <!-- SHOWS ALL unis & cats AVAILABLE; IF CLICK, GOES TO filter URL WITH TYPE OF FILTER & ID -->
 
     <h2>CARRERAS:</h2>                                              <!--SHOWS ALL carreras FILTERED-->
     <ul>{% for i in carreras %}<li>{{i}}</li>{% endfor %}</ul>
 
-</body>
-</html>
+{% endblock %}
