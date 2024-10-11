@@ -5,4 +5,6 @@
 - Lolo (0710): He creado el filtro por búsqueda y comentado partes del proyecto
 
 - Lolo (0810): Modularizado los templates, dividiendos en 'parent_templates': topbar, footer & base (base hereda de los otros) y cada otro template hereda de base. Also, add archivos de Bootstrap y CSS propios
-TODO: Página de cada universidad y carrera (y categoría?) y comparador de carreras (shit)
+
+- Lolo (1110): Reestructurada la página, se asemeja más al boceto presentado. Actualizado el sistema de filtros y búsqueda, y ahora son compatibles en una misma view y template. Creadas páginas propias de universidades y carreras
+TODO: Comenzar diseño? Hacer comparador de carreras (...)

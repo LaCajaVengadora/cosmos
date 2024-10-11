@@ -8,21 +8,13 @@ def testView(request): return render(request, "test.html", {})
 
 def home_view(request):
 
-    query = request.GET.get('q') # GET query IF ANY BY PARAM q
     carreras = Carrera.objects.all() # GET ALL ITEMS ON Carrera
     ctx = {"unis" : Uni.objects.all(), "cats" : Cat.objects.all(), "carreras" : carreras}
     # ↑ SAME WITH Uni & Cat; MAKE ctx DICTIONARY WITH ALL
     
-    if query: # IF THERE WAS query
-        carreras = carreras.filter( # FILTER carreras BY CONTAINING query ON FIELDS id, desc & name
-            Q(id__icontains=query) | Q(desc__icontains=query) | Q(name__icontains=query)
-        )
-        ctx["carreras"], ctx["filter"] = carreras, f"'{query}'" # UPDATE ctx DICTIONARY & ADD filter KEY-VALUE
-        return render(request, "filter.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
-    
     return render(request, "home.html", ctx) # IF NOT query, RENDER home.html TEMPLATE WITH ctx
 
-
+# ------------ UNUSED -----------
 def filter_view(request, type, id): # GET type & id FROM URL
 
     if type=="cat": # IF FILTER type IS cat, GET Cat BY id & FILTER Carrera WITH THAT Cat
@@ -35,6 +27,36 @@ def filter_view(request, type, id): # GET type & id FROM URL
     
     return render(request, "filter.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 
+def search_view(request):
+    query = request.GET.get('q')
+    cat = request.GET.get('cat'); uni = request.GET.get('uni')
+    loc = request.GET.get('loc'); price = request.GET.get('pr'); duration = request.GET.get('dur')
+
+    ctx = {"unis" : Uni.objects.all(), "cats" : Cat.objects.all(), "query": None}
+    carreras = Carrera.objects.all()
+
+    if query and query!="": # IF THERE WAS query
+        carreras = carreras.filter(
+            Q(id__icontains=query) | Q(desc__icontains=query) | Q(name__icontains=query)
+        )
+        ctx["query"] = f"'{query}'"
+    if cat: carreras = carreras.filter(cat=Cat.objects.get(id=cat))
+    if uni: carreras = carreras.filter(uni=Uni.objects.get(id=uni))
+    #if loc: carreras = carreras.filter(uni=Uni.objects.filter(Q(location__icontains=loc)[0]))
+    ctx["carreras"]=carreras # UPDATE ctx DICTIONARY WITH carreras FILTERED
+    #if price: carreras.filter(price=Cat.objects.get(id=cat))
+    #if duration: carreras.filter(cat=Cat.objects.get(id=cat))
+
+    return render(request, "search.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
+
+def carrera_view(request, id):
+    carrera = Carrera.objects.get(id=id); ctx = {"carrera":carrera}
+    return render(request, "carrera.html", ctx)
+
+def uni_view(request, id):
+    uni = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=uni)
+    ctx = {"uni": uni,"carreras":carreras}
+    return render(request, "uni.html", ctx)
 
 
 ''' ---------------------- ↓ IGNORE THIS BUT DO NOOOOT DELETE!!!! ↓ -----------------------

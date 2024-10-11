@@ -11,6 +11,6 @@
     <!-- SHOWS ALL unis & cats AVAILABLE; IF CLICK, GOES TO filter URL WITH TYPE OF FILTER & ID -->
 
     <h2>CARRERAS:</h2>                                              <!--SHOWS ALL carreras FILTERED-->
-    <ul>{% for i in carreras %}<li>{{i}}</li>{% endfor %}</ul>
+    <ul>{% for i in carreras %}<li><a href="{% url 'main:carrera' i.id %}">{{i}}</a></li>{% endfor %}</ul>
 
 {% endblock %}

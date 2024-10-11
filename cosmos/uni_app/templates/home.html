@@ -3,12 +3,23 @@
 
     <h1>HOME</h1> <br>
 
-    <h3>FILTRAR POR:</h3>
-    <p>Categorías: {% for i in cats %} <a href="{% url 'main:filter' 'cat' i.id %}">{{i.name}}</a>{% endfor %}</p>
-    <p>Universidades: {% for i in unis %} <a href="{% url 'main:filter' 'uni' i.id %}">{{i.name}}</a>{% endfor %}</p>
-    <!-- SHOWS ALL unis & cats AVAILABLE; IF CLICK, GOES TO filter URL WITH TYPE OF FILTER & ID -->
+    <h2>UNIS<br>
+        Universidades: {% for i in unis %} <a href="{% url 'main:uni' i.id %}">{{i.name}}</a>{% endfor %}<br>
+    </h2>
+
+    <h4><a href="{% url 'main:search' %}">IR A BÚSQUEDA</a></h4>
     
-    <h2>CARRERAS:</h2>                                              <!--SHOWS ALL carreras -->
-    <ul>{% for i in carreras %}<li>{{i}}</li>{% endfor %}</ul>
+    {% load custom_filters %}
+    {% for i in cats %}
+    <h2>{{i.name}}</h2>
+    <ul>
+        <li><form method="GET" action="{% url 'main:search' %}">
+            <input type="hidden" name="cat" value="{{i.id}}"><input type="submit" value="VER TODOS">
+        </form></li>
+        {% for j in carreras|get_by_cat:i.id %}
+            <li><a href="{% url 'main:carrera' j.id %}">{{j}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
 
 {% endblock %}

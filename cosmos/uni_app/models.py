@@ -33,6 +33,8 @@ class Uni(models.Model): # model ("table") FOR Uni (UNIVERSITIES)
     def __str__(self): return f"{self.name} : {self.tipo}"
     class Meta: verbose_name="Universidad"; verbose_name_plural="Universidades"
 
+    def is_public(self): return self.tipo=='publica'
+
 
 class Carrera(models.Model): # model ("table") FOR Carrera
 
@@ -53,3 +55,5 @@ class Carrera(models.Model): # model ("table") FOR Carrera
             raise ValidationError("El campo 'precio' es obligatorio para carreras en universidades privadas.")
         elif self.uni.tipo == "publica" and self.precio: # RAISE ERROR IF Uni IS publica & precio NOT BLANK
             raise ValidationError("Las carreras en universidades públicas no deben tener un precio.")
+    
+    def is_public(self): return self.uni.tipo=='publica'
