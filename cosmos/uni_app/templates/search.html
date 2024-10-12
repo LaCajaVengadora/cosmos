@@ -3,38 +3,18 @@
 
     {% if query %}<h1>BUSCANDO POR {{query}}</h1>{% endif %}                <!-- SHOWS query if any -->
 
-    <h2>CARRERAS:</h2>                                              <!-- SHOWS ALL carreras FILTERED -->
-    {% if carreras %}
-    <ul>{% for i in carreras %}<li><a href="{% url 'main:carrera' i.id %}">{{i}}</a></li>{% endfor %}</ul>
-    {% else %} <h3>No se han encontrado carreras</h3> {% endif %}
+    <div class="row">
+        <div class="col-10">
+            <h2>CARRERAS:</h2>                                              <!-- SHOWS ALL carreras FILTERED -->
+            {% if carreras %}
+            <ul>{% for i in carreras %}<li><a href="{% url 'main:carrera' i.id %}">{{i}}</a></li>{% endfor %}</ul>
+            {% else %} <h3>No se han encontrado carreras</h3> {% endif %}
+        </div>
+        <div class="col-2 bg-danger rounded-start p-3 text-center">
+            {% include "widgets/filters.html" %}
+        </div>
+    </div>
 
-    <h2>FILTROS:</h2>
-    <a href="{% url 'main:search' %}">Limpiar filtros y búsqueda</a> <!--GOES TO search WITH NO FILTER NOR QUERY-->
-    <div>
-        {% load custom_filters %}
-        <form method="GET" action="{% url 'main:search' %}">
-            <button class="btn btn-primary" type="submit">FILTRAR</button>
 
-            <input type="hidden" name="q" value="{{request.GET.q}}"> <!-- HIDDEN INPUT TO KEEP query -->
-
-            <label for="cat">CATEGORÍA</label>
-            <select id="cat" name="cat">
-                <option value="">Todas</option>
-                {% for i in cats %}
-                    <option value="{{i.id}}" {% if i.id == request.GET.cat|to_int %} selected {% endif %}>{{i.name}}</option>                    
-                {% endfor %}
-            </select>
-            
-
-            <label for="uni">UNIVERSIDAD</label>
-            <select id="uni" name="uni">
-                <option value="">Todas</option>
-                {% for i in unis %}
-                    <option value="{{i.id}}" {% if i.id == request.GET.uni|to_int %}selected{% endif %}>{{i.name}}</option>
-                {% endfor %}
-            </select>
-
-        </form>
-    </div>    
 
 {% endblock %}
