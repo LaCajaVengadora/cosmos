@@ -30,7 +30,7 @@ class View_login(View):
 			if user is not None:
 				login(request, user)
 				return redirect('main:home')
-			return redirect('/login/?wronguser')
-		return redirect('/login/?invalid')
+			return redirect('/auth/login?wronguser')
+		return redirect('/auth/login?invalid')
 
 def logout_view(request): logout(request); return redirect('main:home')

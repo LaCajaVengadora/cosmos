@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'contact_app', 'uni_app', 'auth_app'
+    'contact_app', 'uni_app', 'auth_app', 'blog_app'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'cosmos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['uni_app/templates', 'cosmos/parent_templates', 'auth_app/templates'],
+        'DIRS': ['uni_app/templates', 'cosmos/parent_templates', 'auth_app/templates', 'blog_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
