@@ -9,4 +9,5 @@
 - Lolo (1110): Reestructurada la página, se asemeja más al boceto presentado. Actualizado el sistema de filtros y búsqueda, y ahora son compatibles en una misma view y template. Creadas páginas propias de universidades y carreras
 
 - Lolo (1210): Jugué un poco con los estilos (principalmente de los filtros) y traté de hacer responsive a móvil (sin éxito)
-TODO: Hacer comparador, investigar qué chota quieren las de COM
+
+- Lolo (1510.1): Agregué auth_app y unas views muy simples de login, logout y signin copiadas del doc de Django
