@@ -4,7 +4,10 @@
     <h1>HOME</h1> <br>
 
     <h2>UNIS<br>
-        Universidades: {% for i in unis %} <a href="{% url 'main:uni' i.id %}">{{i.name}}</a>{% endfor %}<br>
+        Universidades: {% for i in unis %} 
+        <a href="{% url 'main:uni' i.id %}">{{i.name}}</a>
+        <img src="{{i.imgs.first.img.url}}" alt="Image not available">
+        {% endfor %}<br>
     </h2>
 
     <h4><a href="{% url 'main:search' %}">IR A BÚSQUEDA</a></h4>

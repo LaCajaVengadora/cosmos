@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 
 
@@ -34,3 +35,7 @@ class View_login(View):
 		return redirect('/auth/login?invalid')
 
 def logout_view(request): logout(request); return redirect('main:home')
+
+@login_required(login_url='auth:login')
+def profile_view(request): 
+	return render(request, 'profile.html')	

@@ -29,6 +29,8 @@ class Uni(models.Model): # model ("table") FOR Uni (UNIVERSITIES)
     tipo = models.CharField(max_length=7, help_text="Selecciona si la universidad es pública o privada.",
         choices=TIPO_CHOICES, # ALLOW TO CHOOSE BY TIPO_CHOICES
         default="publica") # publica BY DEFAULT
+    @property
+    def imgs(self): return self.uniimg_set.all()
 
     def __str__(self): return f"{self.name} : {self.tipo}"
     class Meta: verbose_name="Universidad"; verbose_name_plural="Universidades"
@@ -57,3 +59,37 @@ class Carrera(models.Model): # model ("table") FOR Carrera
             raise ValidationError("Las carreras en universidades públicas no deben tener un precio.")
     
     def is_public(self): return self.uni.tipo=='publica'
+
+class Curso(models.Model): # model ("table") FOR Carrera
+
+    id = models.AutoField(primary_key=True); name = models.CharField(max_length=50); desc = models.TextField()
+    cat = models.ForeignKey(Cat, on_delete=models.CASCADE) # FOREIGN KEY, LINKS AN ITEM FROM Cat
+    uni = models.ForeignKey(Uni, on_delete=models.CASCADE) # SAME ↑
+    modalidad = models.CharField(max_length=50)
+    duration = models.PositiveIntegerField(validators=[MaxValueValidator(10)], help_text="Duración de la carrera en años (max 10)")
+    enroll = models.URLField(max_length=200)
+    @property
+    def imgs(self): return self.imgs_set.all()
+    #precio = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True,
+    #    help_text="Costo de la realización del curso (solo para privadas)."
+    #) # precio: DECIMAL (MAY LEFT BLANK, CHECKED LATER...)
+
+    def __str__(self): return f"{self.name} : {self.uni.name} : {self.cat.name}"
+    class Meta: verbose_name = "Carrera"; verbose_name_plural = "Carreras"
+
+    #def clean(self): # ...WHEN TRYING TO REGISTER Carrera
+    #    if self.uni.tipo == "privada" and not self.precio: # RAISE ERROR IF Uni IS privada & precio BLANK
+    #        raise ValidationError("El campo 'precio' es obligatorio para carreras en universidades privadas.")
+    #    elif self.uni.tipo == "publica" and self.precio: # RAISE ERROR IF Uni IS publica & precio NOT BLANK
+    #        raise ValidationError("Las carreras en universidades públicas no deben tener un precio.")
+    
+    #def is_public(self): return self.uni.tipo=='publica'
+
+class UniImg(models.Model):
+    ID = models.AutoField(primary_key=True)
+    uni = models.ForeignKey(Uni, on_delete=models.CASCADE)
+    img = models.ImageField(default='Uni/default.jgp', upload_to='Uni')
+class CursoImg(models.Model):
+    ID = models.AutoField(primary_key=True)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    img = models.ImageField(default='Curso/default.jgp', upload_to='Curso')
