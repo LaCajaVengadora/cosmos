@@ -1,16 +1,16 @@
 {% extends "base.html" %}{% block title %}{{carrera}}{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: carrera -->
 
-    <h1>{{carrera.name}}</h1> <br>
+    <h1 class="title">{{carrera.name}}</h1> <br>
 
-    <h3>Universidad: <a href="{% url 'main:uni' carrera.uni.id %}">{{carrera.uni.name}}</a>
+    <h3 class="title">Universidad: <a href="{% url 'main:uni' carrera.uni.id %}">{{carrera.uni.name}}</a>
          | Categoría: {{carrera.cat.name}}</h3>
     <p>{{carrera.desc}}</p>
-    
+    {% load custom_filters %}
     <h5>
-        {% if not carrera.is_public %}Precio: ${{carrera.precio}} pesos<br>{% endif %}
-        Modalidad: {{carrera.modalidad}}<br>
-        Duración: {{carrera.duration}} años
+        {% if not carrera.is_public %} <span class="title fs-3">Precio:</span> ${{carrera.precio|to_int}} pesos<br>{% endif %}
+        <span class="title fs-3">Modalidad:</span> {{carrera.modalidad}}<br>
+        <span class="title fs-3">Duración:</span> {{carrera.duration}} años
     </h5>
 
 {% endblock %}

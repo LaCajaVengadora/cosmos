@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-10">
-            <h2>CARRERAS:</h2>                                              <!-- SHOWS ALL carreras FILTERED -->
+            <h2 class="title">CARRERAS:</h2>                                              <!-- SHOWS ALL carreras FILTERED -->
             {% if carreras %}
             <ul>{% for i in carreras %}<li><a href="{% url 'main:carrera' i.id %}">{{i}}</a></li>{% endfor %}</ul>
             {% else %} <h3>No se han encontrado carreras</h3> {% endif %}

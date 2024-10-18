@@ -1,17 +1,29 @@
 {% extends "base.html" %}{% block title %}Home{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
+    
+    <h1 class="title">HOME</h1> <br>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for uni in unis %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ uni.image_url }}" class="card-img-top" alt="{{ uni.name }}">
+                <div class="card-body">
+                    <a class="card-title title" href="{% url 'main:uni' uni.id %}">{{ uni.name }}</a> 
+                    <p class="card-text">{{ uni.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>    
 
-    <h1>HOME</h1> <br>
-
-    <h2>UNIS<br>
-        Universidades: {% for i in unis %} <a href="{% url 'main:uni' i.id %}">{{i.name}}</a>{% endfor %}<br>
-    </h2>
+    <br>
 
     <h4><a href="{% url 'main:search' %}">IR A BÚSQUEDA</a></h4>
     
     {% load custom_filters %}
     {% for i in cats %}
-    <h2>{{i.name}}</h2>
+    <h2 class="title">{{i.name}}</h2>
     <ul>
         <li><form method="GET" action="{% url 'main:search' %}">
             <input type="hidden" name="cat" value="{{i.id}}"><input type="submit" value="VER TODOS">

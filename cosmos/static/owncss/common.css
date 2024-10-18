@@ -1,1 +1,26 @@
 .test{background-color: blue;}
+
+/*
+@font-face {
+    font-family: 'LeagueSpartan-Bold';
+    src :local('LeagueSpartan-Bold'), url('../static/fonts/LeagueSpartan-Bold.ttf')      format("truetype");
+}
+*/
+
+@font-face {
+    font-family: 'LeagueSpartan-Bold';
+    src: url('/static/fonts/LeagueSpartan-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Garet-Book';
+    src: url('/static/fonts/Garet-Book.ttf') format('truetype');
+}
+
+.title{
+    font-family: 'LeagueSpartan-Bold', sans-serif;
+}
+
+body{
+    font-family: 'Garet-Book', sans-serif;
+}
