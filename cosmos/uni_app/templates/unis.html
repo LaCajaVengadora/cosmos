@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block title %}Universidades{% endblock %}
+{% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
+
+    <h2 class="title fs-1">UNIS</h2>
+    
+    <div class="row row-cols-4 g-4">
+        {% for i in unis %}
+        <div class="col">
+            <div class="card">
+                <img src="{{i.imgs.first.img.url}}" class="card-img-top" alt="{{i.name}}">
+                <div class="card-body">
+                    <a class="card-title title" href="{% url 'main:uni' i.id %}">{{i.name}}</a> 
+                    <p class="card-text">{{i.desc|slice:":100"}}...</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>  
+
+{% endblock %}

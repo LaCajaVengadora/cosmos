@@ -9,7 +9,7 @@ def testView(request): return render(request, "test.html", {})
 def home_view(request):
 
     carreras = Carrera.objects.all() # GET ALL ITEMS ON Carrera
-    ctx = {"unis" : Uni.objects.all(), "cats" : Cat.objects.all(), "carreras" : carreras}
+    ctx = {"cats" : Cat.objects.all(), "carreras" : carreras}
     # ↑ SAME WITH Uni & Cat; MAKE ctx DICTIONARY WITH ALL
     
     return render(request, "home.html", ctx) # IF NOT query, RENDER home.html TEMPLATE WITH ctx
@@ -57,6 +57,9 @@ def uni_view(request, id):
     uni = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=uni)
     ctx = {"uni": uni,"carreras":carreras}
     return render(request, "uni.html", ctx)
+
+def unis_view(request):
+    return render(request, "unis.html", {'unis':Uni.objects.all()})
 
 
 ''' ---------------------- ↓ IGNORE THIS BUT DO NOOOOT DELETE!!!! ↓ -----------------------

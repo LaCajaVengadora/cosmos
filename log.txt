@@ -11,3 +11,5 @@
 - Lolo (1210): Jugué un poco con los estilos (principalmente de los filtros) y traté de hacer responsive a móvil (sin éxito)
 
 - Lolo (1510.1): Agregué auth_app y unas views muy simples de login, logout y signin copiadas del doc de Django
+
+- Lolo (1810): Merged y arreglé conflictos existentes junto con un arreglo de los archivos static y media

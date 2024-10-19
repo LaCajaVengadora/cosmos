@@ -1,22 +1,9 @@
 {% extends "base.html" %}{% block title %}Home{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
 
-    <h1>HOME</h1> <br>
+    <h2 class="title fs-1">HOME</h2>
 
-    <h2>UNIS<br>
-    <div class="row row-cols-1 g-4">
-        {% for i in unis %}
-        <div class="col">
-            <div class="card">
-                <img src="{{i.imgs.first.img.url}}" class="card-img-top" alt="{{i.name}}">
-                <div class="card-body">
-                    <a class="card-title title" href="{% url 'main:uni' i.id %}">{{i.name}}</a> 
-                    <p class="card-text">{{i.desc}}</p>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>    
+    <h4><a href="{% url 'main:unis' %}">VER UNIVERSIDADES</a></h4>
 
     <h4><a href="{% url 'main:search' %}">IR A BÚSQUEDA</a></h4>
     

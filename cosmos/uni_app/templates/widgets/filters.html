@@ -8,7 +8,7 @@
 
     <button class="btn btn-primary my-2" type="submit">APLICAR</button>
 
-    <div class="form-floating mb-2">
+    <div class="form-floating mb-2 pt-2">
         <select id="cat" name="cat" class="form-select {% if request.GET.cat %} bg-success {% endif %}">
             <option value="">Todas</option>
             {% for i in cats %}
@@ -18,7 +18,7 @@
         <label for="cat" class="fw-bold">CATEGORÍA</label>
     </div>
             
-    <div class="form-floating">
+    <div class="form-floating pt-2">
         <select id="uni" name="uni" class="form-select {% if request.GET.uni %} bg-success {% endif %}">
             <option value="">Todas</option>
             {% for i in unis %}

@@ -1,13 +1,14 @@
 from django.urls import path
-from uni_app.views import testView, home_view, filter_view, carrera_view, search_view, uni_view
+from uni_app import views
 
 app_name = "main" # uni_app NAME ON URLS
 urlpatterns = [
-    path('test/', testView, name='test'),
-    path('', home_view, name='home'), # home URL USES home_view
-    path('<str:type><int:id>/', filter_view, name='filter'), # filter URL USES !!! UNUSED !!!
+    path('test/', views.testView, name='test'),
+    path('', views.home_view, name='home'), # home URL USES home_view
+    path('<str:type><int:id>/', views.filter_view, name='filter'), # filter URL USES !!! UNUSED !!!
     # RECEIVES type & id TO FILTER
-    path('carrera/<int:id>/', carrera_view, name='carrera'),# filter URL USES carrera_view
-    path('universidad/<int:id>/', uni_view, name='uni'),# filter URL USES carrera_view
-    path('search/', search_view, name='search')
+    path('carrera/<int:id>/', views.carrera_view, name='carrera'),# filter URL USES carrera_view
+    path('universidad/<int:id>/', views.uni_view, name='uni'),# filter URL USES carrera_view
+    path('search/', views.search_view, name='search'),
+    path('unis/', views.unis_view, name='unis')
 ]

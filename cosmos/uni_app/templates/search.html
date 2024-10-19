@@ -4,13 +4,13 @@
     {% if query %}<h1>BUSCANDO POR {{query}}</h1>{% endif %}                <!-- SHOWS query if any -->
 
     <div class="row">
-        <div class="col-10">
+        <div class="col-lg-10 col-md-10 col-xs-10">
             <h2 class="title">CARRERAS:</h2>                                              <!-- SHOWS ALL carreras FILTERED -->
             {% if carreras %}
             <ul>{% for i in carreras %}<li><a href="{% url 'main:carrera' i.id %}">{{i}}</a></li>{% endfor %}</ul>
             {% else %} <h3>No se han encontrado carreras</h3> {% endif %}
         </div>
-        <div class="col-2 bg-danger rounded-start p-3 text-center">
+        <div class="col-lg-2 col-md-2 col-xs-2 bg-danger rounded-start p-3 text-center">
             {% include "widgets/filters.html" %}
         </div>
     </div>

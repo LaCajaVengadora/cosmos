@@ -7,10 +7,10 @@
          | Categoría: {{carrera.cat.name}}</h3>
     <p>{{carrera.desc}}</p>
     {% load custom_filters %}
-    <h5>
+    <div>
         {% if not carrera.is_public %} <span class="title fs-3">Precio:</span> ${{carrera.precio|to_int}} pesos<br>{% endif %}
         <span class="title fs-3">Modalidad:</span> {{carrera.modalidad}}<br>
         <span class="title fs-3">Duración:</span> {{carrera.duration}} años
-    </h5>
+    </div>
 
 {% endblock %}

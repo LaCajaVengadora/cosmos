@@ -1,26 +1,23 @@
 .test{background-color: blue;}
 
-/*
-@font-face {
-    font-family: 'LeagueSpartan-Bold';
-    src :local('LeagueSpartan-Bold'), url('../static/fonts/LeagueSpartan-Bold.ttf')      format("truetype");
-}
-*/
 
 @font-face {
-    font-family: 'LeagueSpartan-Bold';
+    font-family: 'League';
     src: url('/static/fonts/LeagueSpartan-Bold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Garet-Book';
+    font-family: 'Garet';
     src: url('/static/fonts/Garet-Book.ttf') format('truetype');
 }
 
-.title{
-    font-family: 'LeagueSpartan-Bold', sans-serif;
+.title-main{
+    font-family: 'League', sans-serif;
+    font-size: xx-large;
 }
+.title{font-family: 'League', sans-serif; /*font-size: medium;*/}
 
 body{
-    font-family: 'Garet-Book', sans-serif;
+    font-family: 'Garet', sans-serif;
+    font-size: larger;
 }
