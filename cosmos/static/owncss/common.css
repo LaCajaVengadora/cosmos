@@ -21,3 +21,43 @@ body{
     font-family: 'Garet', sans-serif;
     font-size: larger;
 }
+
+.image-container {
+    width: autos;
+    height: 200px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card {
+    height: 350px;
+    overflow: hidden;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
