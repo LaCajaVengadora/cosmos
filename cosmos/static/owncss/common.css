@@ -67,3 +67,16 @@ body{
     color: white;
     border: 1px solid white;
 }
+
+.card-login {
+    height: 350px;
+    width: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-signin {
+    height: 550px;
+    
+}

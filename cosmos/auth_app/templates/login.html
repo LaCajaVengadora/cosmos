@@ -1,18 +1,26 @@
 {% extends "base.html" %}{% block title %}Login{% endblock %}
 {% block content %}                          
+    <div class="card-login">
+        <div class="card-body">
+            <h1>Iniciar Sesión</h1> <br>
 
-    <h1>Login</h1> <br>
-
-    {%if 'invalid' in request.GET%}<h3>ERROR formulario no válido!</h3>
-    {%elif 'wronguser' in request.GET%}<h3>ERROR usuario no válido!</h3>
-    {%endif%}
-
-    <form class="card-body" action="" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Registrarse">
-
-
-    </form>
-
+            {%if 'invalid' in request.GET%}<h3>ERROR formulario no válido!</h3>
+            {%elif 'wronguser' in request.GET%}<h3>ERROR usuario no válido!</h3>
+            {%endif%}
+                
+            <form class="card-body" action="" method="post">
+                {% csrf_token %}
+                {{form}}
+                <br>
+                <input type="submit " value="Iniciar Sesión" style="width: 15.4rem; ">
+                <br>
+                <div class="col-6">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Recordame</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
