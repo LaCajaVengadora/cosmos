@@ -1,6 +1,5 @@
 .test{background-color: blue;}
 
-
 @font-face {
     font-family: 'League';
     src: url('/static/fonts/LeagueSpartan-Bold.ttf') format('truetype');
@@ -11,17 +10,22 @@
     src: url('/static/fonts/Garet-Book.ttf') format('truetype');
 }
 
+.topbar{
+    position: fixed; top: 0; width: 100%; z-index: 1;
+}
+.collapse-btn{
+    width: 300px; position: fixed; left: 0; top: 56px; z-index: 2;
+}
+
 .title-main{
     font-family: 'League', sans-serif;
     font-size: xx-large;
 }
 .title{font-family: 'League', sans-serif;}
 .serif{font-family: 'Times New Roman', sans-serif;}
-.bold{font-weight: bold;}
-.italica{font-style: italic;}
-.no-line {
-    text-decoration: none;
-}
+/*.bold{font-weight: bold;} DO NOT USE FOR BOLD THIS */
+/*.italica{font-style: italic;} DO NOT USE FOR ITALIC THIS */
+.no-line {text-decoration: none;}
 
 body{
     font-family: 'Garet', sans-serif;
@@ -29,8 +33,8 @@ body{
 }
 
 .image-container {
-    width: autos;
-    height: 200px;
+    width: auto;
+    height: 200px; /*THIS IS NOT RESPONSIVE */
     overflow: hidden;
 }
 
@@ -40,16 +44,12 @@ body{
     object-fit: cover;
 }
 
-.card {
-    height: 350px;
-    overflow: hidden;
-}
-
+/*.card {height: 350px; overflow: hidden;}
 .card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+}*/
 
 .social-icons {
     display: flex;
@@ -57,8 +57,9 @@ body{
 }
 
 .btn-circle {
-    width: 40px;
-    height: 40px;
+    /*width: 25%;*/
+    /*height: 100%;*/
+    height: 2.5rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
