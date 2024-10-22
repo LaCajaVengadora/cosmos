@@ -7,59 +7,56 @@
 
 <div class="collapse serif" id="navbarContent">
     <div class="p-4 text-black no-line bg-cream collapse-btn">
-        <h4 class="bold">Menú</h4>
+
+        <h2 class="fw-bold">Menú</h2>
+
         <hr class="text-black">
-        <a class="text-black bold no-line" href="#">Sobre nosotros</a>
+        <a class="text-black fw-bold no-line" href="{% url 'main:home' %}">Home</a>
+
+        <hr class="text-black">
+        <a class="text-black fw-bold no-line" href="https://matias.me/nsfw/">Sobre nosotros</a>
         
         <hr class="text-black">
-        <a class="text-black  no-line bold" href="#" data-bs-toggle="collapse" data-bs-target="#generalSubmenu" aria-expanded="false">General</a>
-        <div class="collapse" id="generalSubmenu">
+        <a class="text-black fw-bold no-line" href="" data-bs-toggle="collapse" data-bs-target="#gralMenu">General</a>
+        <div class="collapse" id="gralMenu">
             <hr class="text-black">
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Carreras</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Cursos</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Becas</a>
+            <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Carreras</a> <br>
+            <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Becas</a> <br>
+            <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Cursos</a> 
         </div>
+
         <hr class="text-black">
-        <a class="text-black bold no-line" href="#" data-bs-toggle="collapse" data-bs-target="#facultadesSubmenu" aria-expanded="false">Facultades</a>
-        <div class="collapse" id="facultadesSubmenu">
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Arquitectura, Diseño y Urbanismo</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Artes y Humanidades</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Ciencias Agrarias y Alimentarias</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Ciencias de la Salud</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Ciencias de la Vida y Naturales</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Computación y Tecnología de la Información</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Derecho y Ciencias Jurídicas</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Educación y Pedagogía</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Ingeniería y Tecnología</a> <br>
-            <a class="text-black no-line" style="font-size: 15px;" href="#">Ciencias Políticas y Sociales</a>
+        <a class="text-black fw-bold no-line" href="" data-bs-toggle="collapse" data-bs-target="#uniMenu">Caregorias</a>
+        <div class="collapse" id="uniMenu">
+            {% for i in cats|dictsort:"name" %}
+                <a class="text-black no-line fs-6" href="#">{{i.name}}</a> <br>
+            {% endfor %}
         </div>
+
         <hr class="text-black">
-        <a class="text-black bold no-line" href="#">Somos usuarios</a>
-        <hr class="text-black">
-        <a class="text-black bold no-line" href="#">Foro</a>
-        <hr class="text-black">
-        <a class="text-black bold no-line" href="#">Ayuda</a>
+        <a class="text-black fw-bold no-line" href="#">Foro</a>
+
     </div>
 </div>
 
-<div>
+<div> <!--             REVISAR             -->
     <a href="{% url 'main:home' %}" class="nav-link text-secondary">
         <img src="media/Logos/top.png" alt="COSMOS" style="width:auto;height:60px;">
     </a>
 </div>
 
 <div class="d-flex align-items-center ms-auto me-5">
-    <a class="nav-link text-secondary" href="#">Foros</a>
-    <a class="nav-link text-secondary" href="#">General</a>
-    <a class="nav-link text-secondary me-3" href="#">Somos usuarios</a>
+
+    <a class="nav-link text-secondary me-3" href="https://matias.me/nsfw/">Foro</a>
+    <a class="nav-link text-secondary" href="https://matias.me/nsfw/">Home</a>
 
     <div class="d-flex align-items-center">
         {% if user.is_authenticated %}
-            <a class="btn btn-primary me-2" href="{% url 'auth:logout' %}" style="background-color: #5A0000; border: none;">Cerrar sesión</a>
-            <a class="btn btn-primary" href="{% url 'auth:profile' %}" style="background-color: #5A0000; border: none;">Perfil</a>
+            <a class="btn btn-styles me-2" href="{% url 'auth:logout' %}">Cerrar sesión</a>
+            <a class="btn btn-styles" href="{% url 'auth:profile' %}">Perfil</a>
         {% else %}
-            <a class="btn btn-danger me-2" href="{% url 'auth:login' %}" style="background-color: #5A0000; border: none;">Iniciar sesión</a>
-            <a class="btn btn-danger" href="{% url 'auth:signin' %}" style="background-color: #5A0000; border: none;">Registrarse</a>
+            <a class="btn btn-styles me-2" href="{% url 'auth:login' %}">Iniciar sesión</a>
+            <a class="btn btn-styles" href="{% url 'auth:signin' %}">Registrarse</a>
         {% endif %}
     </div>
 </div>

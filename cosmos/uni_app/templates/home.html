@@ -2,7 +2,7 @@
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
     
 <div class="mt-5">
-    <h1 class="serif" style="text-align: center; font-size: 4rem; margin: 20px 0;">"Encontrá tu lugar <br> en el <span class="italica">universo</span>"</h1>
+    <h1 class="serif" style="text-align: center; font-size: 4rem; margin: 20px 0;">"Encontrá tu lugar <br> en el <span class="fst-italic">universo</span>"</h1>
     <br>
     <div class="d-flex justify-content-center align-items-center mb-4">
         <form class="input-group" role="search" method="GET" action="{% url 'main:search' %}" style="max-width: 600px; width: 100%;">
@@ -11,7 +11,7 @@
             </button>
             <input class="form-control" type="search" name="q" placeholder="Buscar por palabras clave" aria-label="Search" aria-describedby="search-addon" style="border-radius: 25px; margin-right: 10px;">
         </form>
-        <a class="btn btn-danger me-2" style="background-color: #5A0000; border: none; border-radius: 25px;" href="{% url 'main:test' %}">COMPARADOR</a>
+        <a class="btn btn-styles me-2" href="{% url 'main:test' %}">COMPARADOR</a>
     </div>
 </div>
 

@@ -1,2 +1,11 @@
 .bg-reddish{background-color: #5A0000;}
 .bg-cream{background-color: #EEEAE1;}
+.btn-styles{
+    background-color: #5A0000;
+    color: white; border: none;
+    border-radius: 10px;
+
+}
+.btn-styles:hover{
+    background-color: #8d1515;
+}
