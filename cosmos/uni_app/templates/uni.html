@@ -2,16 +2,12 @@
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
 
     <h1 class="title">{{uni.name}}</h1> <br>
-
     <p>{{uni.desc}}</p>
-    
     <h5>
         <span class="title fs-3">Tipo: </span> {{uni.tipo}}<br>
         <span class="title fs-3">Ubicación: </span> {{uni.location}}
     </h5>
-
     <br>
-    
     <h3 class="title">CARRERAS: </h3>
     <ul>{% for i in carreras %}<li><a href="{% url 'main:carrera' i.id %}">{{i}}</a></li>{% endfor %}</ul>
 

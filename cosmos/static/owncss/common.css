@@ -15,7 +15,13 @@
     font-family: 'League', sans-serif;
     font-size: xx-large;
 }
-.title{font-family: 'League', sans-serif; /*font-size: medium;*/}
+.title{font-family: 'League', sans-serif;}
+.serif{font-family: 'Times New Roman', sans-serif;}
+.bold{font-weight: bold;}
+.italica{font-style: italic;}
+.no-line {
+    text-decoration: none;
+}
 
 body{
     font-family: 'Garet', sans-serif;
