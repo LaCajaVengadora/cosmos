@@ -6,35 +6,35 @@
 </button>
 
 <div class="collapse serif" id="navbarContent">
-    <div class="p-4 text-black no-line bg-cream collapse-btn">
+    <div class="p-4 no-line bg-cream collapse-btn">
 
         <h2 class="fw-bold">Menú</h2>
 
-        <hr class="text-black">
+        <hr>
         <a class="text-black fw-bold no-line" href="{% url 'main:home' %}">Home</a>
         
-        <hr class="text-black">
+        <hr>
         <a class="text-black fw-bold no-line" href="" data-bs-toggle="collapse" data-bs-target="#gralMenu">General</a>
         <div class="collapse" id="gralMenu">
-            <hr class="text-black">
+            <hr>
             <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Carreras</a> <br>
             <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Becas</a> <br>
             <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Cursos</a> 
         </div>
 
-        <hr class="text-black">
+        <hr>
         <a class="text-black fw-bold no-line" href="" data-bs-toggle="collapse" data-bs-target="#uniMenu">Categorias</a>
         <div class="collapse" id="uniMenu">
-            <hr class="text-black">
+            <hr>
             {% for i in cats|dictsort:"name" %}
                 <a class="text-black no-line fs-6" href="#">{{i.name}}</a> <br>
             {% endfor %}
         </div>
 
-        <hr class="text-black">
+        <hr>
         <a class="text-black fw-bold no-line" href="#">Foro</a>
 
-        <hr class="text-black">
+        <hr>
         <a class="text-black fw-bold no-line" href="https://matias.me/nsfw/">Sobre nosotros</a>
 
     </div>
