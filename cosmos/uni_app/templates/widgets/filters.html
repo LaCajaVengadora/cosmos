@@ -1,31 +1,29 @@
-
-<h2 class="text-end">FILTROS</h2>
-<a href="{% url 'main:search' %}" class="btn btn-primary">Limpiar filtros y búsqueda</a> <!--GOES TO search WITH NO FILTER NOR QUERY-->
+<h2 class="text-center text-black title">FILTROS</h2>
+<a href="{% url 'main:search' %}" class="btn btn-styles">Limpiar filtros y búsqueda</a> <!--GOES TO search WITH NO FILTER NOR QUERY-->
 {% load custom_filters %}
 <form method="GET" action="{% url 'main:search' %}">
 
-    <input type="hidden" name="q" value="{{request.GET.q}}"> <!-- HIDDEN INPUT TO KEEP query -->
-
-    <button class="btn btn-primary my-2" type="submit">APLICAR</button>
-
     <div class="form-floating mb-2 pt-2">
-        <select id="cat" name="cat" class="form-select {% if request.GET.cat %} bg-success {% endif %}">
+        <select id="cat" name="cat" class="form-select {% if request.GET.cat %} {% endif %}">
             <option value="">Todas</option>
             {% for i in cats %}
                 <option value="{{i.id}}" {% if i.id == request.GET.cat|to_int %} selected {% endif %}>{{i.name}}</option>                    
             {% endfor %}
         </select>
-        <label for="cat" class="fw-bold">CATEGORÍA</label>
+        <label for="cat" class="fw-bold text-black">CATEGORÍA</label>
     </div>
             
     <div class="form-floating pt-2">
-        <select id="uni" name="uni" class="form-select {% if request.GET.uni %} bg-success {% endif %}">
+        <select id="uni" name="uni" class="form-select {% if request.GET.uni %} {% endif %}">
             <option value="">Todas</option>
             {% for i in unis %}
                 <option value="{{i.id}}" {% if i.id == request.GET.uni|to_int %}selected{% endif %}>{{i.name}}</option>
             {% endfor %}
         </select>
-        <label for="uni" class="fw-bold">UNIVERSIDAD</label>
+        <label for="uni" class="fw-bold text-black">UNIVERSIDAD</label>
     </div>
 
+    <input type="hidden" name="q" value="{{request.GET.q}}"> <!-- HIDDEN INPUT TO KEEP query -->
+    
+    <button class="btn btn-styles my-2" type="submit">APLICAR</button>
 </form>

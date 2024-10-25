@@ -136,5 +136,5 @@ EMAIL_HOST = 'smtp.gmail.com'; EMAIL_USE_TLS = True; EMAIL_PORT = 587
 EMAIL_HOST_USER='schrodingernoreply@gmail.com'; EMAIL_HOST_PASSWORD='svya dujl eega xmjm'
 
 # MEDIA (IMGS OF models) SETTINGS
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT =  BASE_DIR / 'media'

@@ -1,7 +1,7 @@
 {% extends "base.html" %}{% block title %}Login{% endblock %}
 {% block content %}                          
 
-    <h1>Login</h1> <br>
+    <h1 class="title">Login</h1> <br>
 
     {%if 'invalid' in request.GET%}<h3>ERROR formulario no válido!</h3>
     {%elif 'wronguser' in request.GET%}<h3>ERROR usuario no válido!</h3>
@@ -9,7 +9,7 @@
 
     <form class="card-body" action="" method="post">
         {% csrf_token %}
-        {{form}}
+        {{form}} <br>
         <input type="submit" value="Registrarse">
 
 
