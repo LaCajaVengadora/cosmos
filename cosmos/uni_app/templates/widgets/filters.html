@@ -1,29 +1,38 @@
-<h2 class="text-center text-black title">FILTROS</h2>
-<a href="{% url 'main:search' %}" class="btn btn-styles">Limpiar filtros y búsqueda</a> <!--GOES TO search WITH NO FILTER NOR QUERY-->
-{% load custom_filters %}
-<form method="GET" action="{% url 'main:search' %}">
 
-    <div class="form-floating mb-2 pt-2">
-        <select id="cat" name="cat" class="form-select {% if request.GET.cat %} {% endif %}">
-            <option value="">Todas</option>
-            {% for i in cats %}
-                <option value="{{i.id}}" {% if i.id == request.GET.cat|to_int %} selected {% endif %}>{{i.name}}</option>                    
-            {% endfor %}
-        </select>
-        <label for="cat" class="fw-bold text-black">CATEGORÍA</label>
-    </div>
-            
-    <div class="form-floating pt-2">
-        <select id="uni" name="uni" class="form-select {% if request.GET.uni %} {% endif %}">
-            <option value="">Todas</option>
-            {% for i in unis %}
-                <option value="{{i.id}}" {% if i.id == request.GET.uni|to_int %}selected{% endif %}>{{i.name}}</option>
-            {% endfor %}
-        </select>
-        <label for="uni" class="fw-bold text-black">UNIVERSIDAD</label>
-    </div>
+<div class="bg-cream rounded-start p-3 text-center">
 
-    <input type="hidden" name="q" value="{{request.GET.q}}"> <!-- HIDDEN INPUT TO KEEP query -->
+    <h2 class="text-center text-black title">FILTROS</h2>
+
+    <a href="{% url 'main:search' %}" class="btn btn-counter">LIMPIAR</a> <!--GOES TO search WITH NO FILTER NOR QUERY-->
+
+    {% load custom_filters %}
+    <form method="GET" action="{% url 'main:search' %}">
+
+        <button class="btn btn-styles my-2" type="submit">APLICAR</button>
+
+        <!--<input type="hidden" name="q" value="{{request.GET.q}}">  HIDDEN INPUT TO KEEP query -->
+        <input class="form-control rounded-5" type="search" name="q" placeholder="Buscar...">
+
+        <div class="form-floating pt-2">
+            <select id="cat" name="cat" class="form-select {% if request.GET.cat %} bg-light-reddish {% endif %}">
+                <option value="">Todas</option>
+                {% for i in cats %}
+                    <option value="{{i.id}}" {% if i.id == request.GET.cat|to_int %} selected {% endif %}>{{i.name}}</option>                    
+                {% endfor %}
+            </select>
+            <label for="cat" class="fw-bold fs-5 text-black">CATEGORÍA</label>
+        </div>
+                
+        <div class="form-floating pt-2">
+            <select id="uni" name="uni" class="form-select {% if request.GET.uni %} bg-light-reddish {% endif %}">
+                <option value="">Todas</option>
+                {% for i in unis %}
+                    <option value="{{i.id}}" {% if i.id == request.GET.uni|to_int %}selected{% endif %}>{{i.name}}</option>
+                {% endfor %}
+            </select>
+            <label for="uni" class="fw-bold fs-5 text-black">UNIVERSIDAD</label>
+        </div>
+
+    </form>
     
-    <button class="btn btn-styles my-2" type="submit">APLICAR</button>
-</form>
+</div>

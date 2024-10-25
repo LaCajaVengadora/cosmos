@@ -1,35 +1,43 @@
 {% extends "base.html" %}{% block title %}Buscador{% endblock %}
 {% block content %}                                <!-- GETS FROM ctx: unis, cats, carreras & query -->
 
-    {% if query %}<h1>BUSCANDO POR {{query}}</h1>{% endif %}                <!-- SHOWS query if any -->
+    
 
     <div class="row">
-        <div class="col-lg-10 col-md-10 col-xs-10">
-            <h2 class="title">CARRERAS:</h2> <!-- SHOWS ALL carreras FILTERED -->
+        <div class="col-10">
+            {% if query %}<h1 class="mb-3">BUSCANDO POR {{query}}</h1>{% endif %}        <!-- SHOWS query if any -->
+            <h1 class="title mb-4">CARRERAS:</h1> <!-- SHOWS ALL carreras FILTERED -->
+
             {% if carreras %}
                 <div class="row">
                     {% for carrera in carreras %}
                         <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">{{ carrera.name }}</h5>
+                                    <h3 class="card-title mb-0 fs-3 title">{{ carrera.name }}</h3>
                                 </div>
                                 <div class="card-body">
-                                    {{ carrera.cat.name }} en 
-                                    <a style="font-size: large;" href="{% url 'main:uni' carrera.uni.id %}">{{ carrera.uni.name }}</a> <br> <br>
-                                    <a href="{% url 'main:carrera' carrera.id %}" class="btn btn-styles">Ver detalles</a>
+                                    <p>{{ carrera.desc|slice:100 }}... </p>
+                                    <a href="{% url 'main:carrera' carrera.id %}" class="btn btn-styles mb-3">Ver detalles</a>
+                                    <div class="fw-medium">
+                                        <a class="links" href="{% url 'main:uni' carrera.uni.id %}">{{ carrera.uni.name }}</a>
+                                        <p class="mb-0" style="color: {{carrera.cat.color}};">{{carrera.cat.name}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
             {% else %}
+
                 <h3>No se han encontrado carreras</h3>
             {% endif %}
         </div>
-        <div class="col-lg-2 col-md-2 col-xs-2 rounded-start p-3 text-center" style="background-color: #EEEAE1;">
+        
+        <div class="col-2 p-0">
             {% include "widgets/filters.html" %}
         </div>
+
     </div>
     
 
