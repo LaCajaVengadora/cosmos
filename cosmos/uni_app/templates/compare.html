@@ -9,8 +9,7 @@
 {%endif%}
 
 {% load custom_filters %}
-<form action="#" method="get" class="m-3 my-5">
-
+<form action="#" method="get" class="my-5">
     <div class="row d-flex align-items-center text-center">
 
         <div class="col-5">
@@ -34,23 +33,43 @@
         </div>
         
     </div>    
-
-    
 </form>
 
+{% if chosen %}<div class="row">
+    
+    {% if type == 'unis' %} {% for uni, carreras in chosen %}
 
-<div class="mt-5">
-    <h1 class="serif" style="text-align: center; font-size: 4rem; margin: 20px 0;">"Compara carreras con nuestro <br> <span class="fst-italic">comparador de carreras</span>"</h1>
-    <br>
-    <div class="d-flex justify-content-center align-items-center mb-4">
-        <form class="input-group" role="search" method="GET" action="{% url 'main:search' %}" style="max-width: 600px; width: 100%;">
-            <button class="btn btn-styles input-group-text" style="border: none; border-radius: 25px; margin-right: 10px;" type="submit" id="search-addon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <input class="form-control" type="search" name="q" placeholder="Buscar por palabras clave" aria-label="Search" aria-describedby="search-addon" style="border-radius: 25px; margin-right: 10px;">
-        </form>
-        <a class="btn btn-styles me-2" style="border-radius: 25px;" href="{% url 'main:test' %}">COMPARADOR</a>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-cream">
+                <h2 class="title mb-0">{{ uni.name }}</h2>
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    {% for i in carreras %}
+                        <li><a class="links" href="{% url 'main:carrera' i.id %}">{{i}}</a></li>
+                    {%endfor%}
+                </ul>           
+            </div>
+        </div>
     </div>
-</div>
+
+    {%endfor%} {% else %} {% for i in chosen %}
+    
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-cream">
+                <h2 class="title mb-0">{{ i.name }}</h2>
+            </div>
+            <div class="card-body">
+                <p>{{i.desc}}</p>  
+            </div>
+        </div>
+    </div>
+    
+    
+    {%endfor%} {%endif%}
+
+</div>{%endif%}
 
 {% endblock %}

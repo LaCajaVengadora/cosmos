@@ -43,7 +43,7 @@ def carrera_view(request, id):
 
 def uni_view(request, id):
     uni = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=uni)
-    ctx = {"uni": uni,"carreras":carreras,"cats":Cat.objects.all()}
+    ctx = {"uni": uni, "carreras":carreras, "cats":Cat.objects.all()}
     return render(request, "individual/uni.html", ctx)
 
 def unis_view(request):
@@ -51,11 +51,16 @@ def unis_view(request):
 
 def compare_view(request, type):
     ctx={"type":type, "cats":Cat.objects.all(),
-         "options":Uni.objects.all() if type=="unis" else Carrera.objects.all()
+         "options":Uni.objects.all() if type=="unis" else Carrera.objects.all(),
+         "chosen":None
         }
-    #id1, id2 = request.GET.get('id1'), request.GET.get('id2')
-
-
+    id1, id2 = request.GET.get('id1'), request.GET.get('id2')
+    if id1 and id2 and id1!=id2:
+        if type=="unis":
+            uni1, uni2 = Uni.objects.get(id=id1), Uni.objects.get(id=id2)
+            ctx["chosen"]=zip((uni1, uni2),(Carrera.objects.filter(uni=uni1), Carrera.objects.filter(uni=uni2)))
+        else:
+            ctx["chosen"]=(Carrera.objects.get(id=id1), Carrera.objects.get(id=id2))
 
     return render(request, "compare.html", ctx)
 
