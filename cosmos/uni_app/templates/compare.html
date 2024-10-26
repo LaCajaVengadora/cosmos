@@ -1,0 +1,56 @@
+{% extends "base.html" %}{% block title %}Comparador{% endblock %}
+{% block content %}                          
+
+<h2 class="title fs-1 mb-4">COMPARADOR</h2>
+{% if type == 'unis' %}
+<a href="{% url 'main:compare' 'carreras' %}" class="btn btn-styles no-line">Cambiar a carreras</a>
+{% elif type == 'carreras' %}
+<a href="{% url 'main:compare' 'unis' %}" class="btn btn-styles no-line">Cambiar a universidades</a>
+{%endif%}
+
+{% load custom_filters %}
+<form action="#" method="get" class="m-3 my-5">
+
+    <div class="row d-flex align-items-center text-center">
+
+        <div class="col-5">
+            <select class="form-select" name="id1">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                {%for i in options|dictsort:"name"%}
+                    <option value="{{i.id}}" {% if i.id == request.GET.id1|to_int %} selected {% endif %}>{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        
+        <input type="submit" class="btn btn-styles btn-lg col-2" value="COMPARAR">
+
+        <div class="col-5">
+            <select class="form-select" name="id2">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                {%for i in options|dictsort:"name"%}
+                <option value="{{i.id}}" {% if i.id == request.GET.id2|to_int %} selected {% endif %}>{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        
+    </div>    
+
+    
+</form>
+
+
+<div class="mt-5">
+    <h1 class="serif" style="text-align: center; font-size: 4rem; margin: 20px 0;">"Compara carreras con nuestro <br> <span class="fst-italic">comparador de carreras</span>"</h1>
+    <br>
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <form class="input-group" role="search" method="GET" action="{% url 'main:search' %}" style="max-width: 600px; width: 100%;">
+            <button class="btn btn-styles input-group-text" style="border: none; border-radius: 25px; margin-right: 10px;" type="submit" id="search-addon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input class="form-control" type="search" name="q" placeholder="Buscar por palabras clave" aria-label="Search" aria-describedby="search-addon" style="border-radius: 25px; margin-right: 10px;">
+        </form>
+        <a class="btn btn-styles me-2" style="border-radius: 25px;" href="{% url 'main:test' %}">COMPARADOR</a>
+    </div>
+</div>
+
+{% endblock %}

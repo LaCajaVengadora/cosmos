@@ -15,10 +15,19 @@
 </div>
 
 <div class="d-flex justify-content-center align-items-center my-5">
-    <a class="btn btn-styles me-2" href="{% url 'main:unis' %}"> VER UNIVERSIDADES </a>
-    <a class="btn btn-styles me-2" href="{% url 'main:search' %}"> IR A BÚSQUEDA </a>
-    <a class="btn btn-styles" href="{% url 'main:test' %}">COMPARADOR</a>
+    <a class="btn btn-styles me-2" href="{% url 'main:unis' %}">VER UNIVERSIDADES</a>
+    <a class="btn btn-styles me-2" href="{% url 'main:search' %}">IR A BÚSQUEDA</a>
+    <div class="dropdown">
+        <button class="btn btn-styles dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          COMPARADOR
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'main:compare' 'uni' %}">Universidades</a></li>
+          <li><a class="dropdown-item" href="{% url 'main:compare' 'carreras' %}">Carreras</a></li>
+        </ul>
+      </div>
 </div>
+
 
 <div class="row mb-3 justify-content-center">
     <div class="col-3 mb-4 card h-100">
@@ -42,34 +51,33 @@
 </div>
 
 {% load custom_filters %}
-<div class="mt-5 mx-5">
-    <div class="row">
-        {% for i in cats|dictsort:"name" %}
+<div class="mt-5 mx-5 row">
+    
+    {% for i in cats|dictsort:"name" %}
 
-        <div class="col-6 mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="title">{{ i.name }}</h2>
-                </div>
-                <div class="card-body">
-                    <ul class="mb-0">
-                        {% for j in carreras|get_by_cat:i.id %}
-                            <li class="mb-4"><a class="links" href="{% url 'main:carrera' j.id %}">{{j}}</a></li>
-                        {%endfor%}
-                        <li class="list-unstyled">
-                            <form method="GET" action="{% url 'main:search' %}">
-                                <input type="hidden" name="cat" value="{{ i.id }}">
-                                <input type="submit" class="btn btn-styles" value="VER TODOS">
-                            </form>
-                        </li>
-                    </ul>
-                    
-                </div>
+    <div class="col-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-cream">
+                <h2 class="title mb-0">{{ i.name }}</h2>
+            </div>
+            <div class="card-body">
+
+                <ul class="mb-0">
+                    {% for j in carreras|get_by_cat:i.id %}
+                        <li class="mb-3"><a class="links" href="{% url 'main:carrera' j.id %}">{{j}}</a></li>
+                    {%endfor%}
+                </ul>
+                <form method="GET" action="{% url 'main:search' %}">
+                    <input type="hidden" name="cat" value="{{ i.id }}">
+                    <input type="submit" class="btn btn-styles" value="VER TODOS">
+                </form>
+                
             </div>
         </div>
-        
-        {% endfor %}
     </div>
+
+    {% endfor %}
+    
 </div>    
 
 {% endblock %}

@@ -14,18 +14,6 @@ def home_view(request):
     
     return render(request, "home.html", ctx) # IF NOT query, RENDER home.html TEMPLATE WITH ctx
 
-# ------------ UNUSED -----------
-def filter_view(request, type, id): # GET type & id FROM URL
-
-    if type=="cat": # IF FILTER type IS cat, GET Cat BY id & FILTER Carrera WITH THAT Cat
-        filter = Cat.objects.get(id=id); carreras = Carrera.objects.filter(cat=filter)
-    elif type=="uni": # ↑ SAME
-        filter = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=filter)
-
-    ctx = {"unis":Uni.objects.all(),"cats":Cat.objects.all(), 
-           "carreras":carreras, "filter":filter.name}
-    
-    return render(request, "filter.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 
 def search_view(request):
     query = request.GET.get('q')
@@ -50,16 +38,26 @@ def search_view(request):
     return render(request, "search.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 
 def carrera_view(request, id):
-    carrera = Carrera.objects.get(id=id); ctx = {"carrera":carrera}
-    return render(request, "carrera.html", ctx)
+    carrera = Carrera.objects.get(id=id); ctx = {"carrera":carrera, 'cats':Cat.objects.all()}
+    return render(request, "individual/carrera.html", ctx)
 
 def uni_view(request, id):
     uni = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=uni)
-    ctx = {"uni": uni,"carreras":carreras}
-    return render(request, "uni.html", ctx)
+    ctx = {"uni": uni,"carreras":carreras,"cats":Cat.objects.all()}
+    return render(request, "individual/uni.html", ctx)
 
 def unis_view(request):
-    return render(request, "unis.html", {'unis':Uni.objects.all()})
+    return render(request, "unis.html", {'unis':Uni.objects.all(), "cats":Cat.objects.all()})
+
+def compare_view(request, type):
+    ctx={"type":type, "cats":Cat.objects.all(),
+         "options":Uni.objects.all() if type=="unis" else Carrera.objects.all()
+        }
+    #id1, id2 = request.GET.get('id1'), request.GET.get('id2')
+
+
+
+    return render(request, "compare.html", ctx)
 
 
 ''' ---------------------- ↓ IGNORE THIS BUT DO NOOOOT DELETE!!!! ↓ -----------------------
@@ -79,4 +77,16 @@ def get_data(request, cat=None):
     cats = Category.objects.all()
 
     return render(request, 'home.html', {'items':items,'cats':cats})'''
+# ------------ UNUSED -----------
+def filter_view(request, type, id): # GET type & id FROM URL
+
+    if type=="cat": # IF FILTER type IS cat, GET Cat BY id & FILTER Carrera WITH THAT Cat
+        filter = Cat.objects.get(id=id); carreras = Carrera.objects.filter(cat=filter)
+    elif type=="uni": # ↑ SAME
+        filter = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=filter)
+
+    ctx = {"unis":Uni.objects.all(),"cats":Cat.objects.all(), 
+           "carreras":carreras, "filter":filter.name}
+    
+    return render(request, "filter.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 

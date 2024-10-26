@@ -20,7 +20,7 @@
                     <option value="{{i.id}}" {% if i.id == request.GET.cat|to_int %} selected {% endif %}>{{i.name}}</option>                    
                 {% endfor %}
             </select>
-            <label for="cat" class="fw-bold fs-5 text-black">CATEGORÍA</label>
+            <label for="cat" class="fw-bold fs-6 text-black z-0">CATEGORÍA</label>
         </div>
                 
         <div class="form-floating pt-2">
@@ -30,7 +30,7 @@
                     <option value="{{i.id}}" {% if i.id == request.GET.uni|to_int %}selected{% endif %}>{{i.name}}</option>
                 {% endfor %}
             </select>
-            <label for="uni" class="fw-bold fs-5 text-black">UNIVERSIDAD</label>
+            <label for="uni" class="fw-bold fs-6 text-black z-0">UNIVERSIDAD</label>
         </div>
 
     </form>

@@ -4,12 +4,13 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
+from uni_app.models import Cat
 
 
 class View_signin(View):
 	
 	def get(self, request):
-		return render(request, 'signin.html', {'form':UserCreationForm()})
+		return render(request, 'signin.html', {'form':UserCreationForm(), 'cats':Cat.objects.all()})
 	
 	def post(self, request):
 		f = UserCreationForm(request.POST)
@@ -20,10 +21,10 @@ class View_signin(View):
 		else:
 			for msg in f.error_messages:
 				messages.error(request, f.error_messages[msg])
-			return render(request, 'signin.html', {'form':f})
+			return render(request, 'signin.html', {'form':f, 'cats':Cat.objects.all()})
 
 class View_login(View):
-	def get(self, request): return render(request, 'login.html', {'form':AuthenticationForm()})
+	def get(self, request): return render(request, 'login.html', {'form':AuthenticationForm(), 'cats':Cat.objects.all()})
 	def post(self, request):
 		f = AuthenticationForm(request, request.POST)
 		if f.is_valid():
@@ -37,5 +38,5 @@ class View_login(View):
 def logout_view(request): logout(request); return redirect('main:home')
 
 @login_required(login_url='auth:login')
-def profile_view(request): 
-	return render(request, 'profile.html')	
+def profile_view(request):
+	return render(request, 'profile.html', {'cats':Cat.objects.all()})
