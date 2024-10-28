@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from uni_app.models import Carrera, Cat, Uni
+from uni_app.models import Carrera, Cat, Uni, Curso, Beca
 from django.db.models import Q
 
 # Create your views here.
@@ -37,18 +37,45 @@ def search_view(request):
 
     return render(request, "search.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 
-def carrera_view(request, id):
-    carrera = Carrera.objects.get(id=id); ctx = {"carrera":carrera, 'cats':Cat.objects.all()}
-    return render(request, "individual/carrera.html", ctx)
+def many_view(request, type):
+    ctx = {'cats':Cat.objects.all(), "type":type}
+    if type=="unis": ctx["result"]=Uni.objects.all()
+    elif type=="cursos": ctx["result"]=Curso.objects.all()
+    else: ctx["result"]=Beca.objects.all()
+    return render(request, "many.html", ctx)
 
-def uni_view(request, id):
-    uni = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=uni)
-    ctx = {"uni": uni, "carreras":carreras, "cats":Cat.objects.all()}
-    return render(request, "individual/uni.html", ctx)
+def one_view(request, type, id):
+    ctx = {'cats':Cat.objects.all(), "type":type}
+    if type=="unis": 
+        uni = Uni.objects.get(id=id); ctx["one"]=uni
+        ctx["carreras"]=Carrera.objects.filter(uni=uni)
+        ctx["cursos"]=Curso.objects.filter(uni=uni)
+        ctx["becas"]=Beca.objects.filter(uni=uni)
+    elif type=="cursos": ctx["one"]=Curso.objects.get(id=id)
+    elif type=="carreras": ctx["one"]=Carrera.objects.get(id=id); print(int(ctx["one"].precio))
+    else: ctx["one"]=Beca.objects.get(id=id)
+    return render(request, "one.html", ctx)
 
-def unis_view(request):
-    return render(request, "unis.html", {'unis':Uni.objects.all(), "cats":Cat.objects.all()})
-
+#
+#def carrera_view(request, id):
+#    carrera = Carrera.objects.get(id=id); ctx = {"carrera":carrera, 'cats':Cat.objects.all()}
+#    return render(request, "individual/carrera.html", ctx)
+#
+#def curso_view(request, id):
+#    curso = Curso.objects.get(id=id); ctx = {"curso":curso, 'cats':Cat.objects.all()}
+#    return render(request, "individual/curso.html", ctx)
+#
+#def uni_view(request, id):
+#    uni = Uni.objects.get(id=id); carreras = Carrera.objects.filter(uni=uni)
+#    ctx = {"uni": uni, "carreras":carreras, "cats":Cat.objects.all()}
+#    return render(request, "individual/uni.html", ctx)
+#
+#def unis_view(request):
+#    return render(request, "unis.html", {'unis':Uni.objects.all(), "cats":Cat.objects.all()})
+#
+#def cursos_view(request):
+#    return render(request, "cursos.html", {'cursos':Curso.objects.all(), "cats":Cat.objects.all()})
+#
 def compare_view(request, type):
     ctx={"type":type, "cats":Cat.objects.all(),
          "options":Uni.objects.all() if type=="unis" else Carrera.objects.all(),

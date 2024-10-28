@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block title %}{{curso}}{% endblock %}
+{% block content %}                          <!-- GETS FROM ctx: carrera -->
+
+    <h1 class="title">{{curso.name}}</h1> <br>
+
+<h3 class="title">Universidad: <a href="{% url 'main:uni' curso.uni.id %}">{{curso.uni.name}}</a>
+         | Categoría: {{curso.cat.name}}</h3>
+    <p>{{curso.desc}}</p>
+    {% load custom_filters %}
+    <div>
+        <span class="title fs-3">Precio:</span> ${{curso.precio|to_int}} pesos<br>
+        <span class="title fs-3">Modalidad:</span> {{curso.modalidad}}<br>
+        <span class="title fs-3">Duración:</span> {{curso.duration}} meses<br>
+        <a class="title fs-3" href="{{curso.enroll}}">Inscribirse</a>
+    </div>
+
+{% endblock %}

@@ -20,9 +20,10 @@
         <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#gralMenu">General</a>
         <div class="collapse" id="gralMenu">
             <hr>
-            <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Carreras</a> <br>
-            <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Becas</a> <br>
-            <a class="text-black no-line fs-6" href="https://matias.me/nsfw/">Cursos</a> 
+            <a class="text-black no-line fs-6" href="{% url 'main:many' 'unis' %}">Universidades</a> <br>
+            <a class="text-black no-line fs-6" href="{% url 'main:search' %}">Carreras</a> <br>
+            <a class="text-black no-line fs-6" href="{% url 'main:many' 'cursos' %}">Cursos</a> <br>
+            <a class="text-black no-line fs-6" href="{% url 'main:many' 'becas' %}">Becas</a> 
         </div>
         
 

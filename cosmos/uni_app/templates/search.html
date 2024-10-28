@@ -18,9 +18,9 @@
                                 </div>
                                 <div class="card-body">
                                     <p>{{ carrera.desc|slice:100 }}... </p>
-                                    <a href="{% url 'main:carrera' carrera.id %}" class="btn btn-styles mb-3">Ver detalles</a>
+                                    <a href="{% url 'main:one' 'carreras' carrera.id %}" class="btn btn-styles mb-3">Ver detalles</a>
                                     <div class="fw-medium">
-                                        <a class="links" href="{% url 'main:uni' carrera.uni.id %}">{{ carrera.uni.name }}</a>
+                                        <a class="links" href="{% url 'main:one' 'unis' carrera.uni.id %}">{{ carrera.uni.name }}</a>
                                         <p class="mb-0" style="color: {{carrera.cat.color}};">{{carrera.cat.name}}</p>
                                     </div>
                                 </div>
