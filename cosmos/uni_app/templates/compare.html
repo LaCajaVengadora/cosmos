@@ -44,10 +44,12 @@
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ uni.name }}</h2>
             </div>
+            <p href="{{i.imgs.first.img.url}}"></p>
+            <p class="p-2 mb-0 text-center">{{ uni.desc }}</p>
             <div class="card-body">
                 <ul class="mb-0">
                     {% for i in carreras %}
-                        <li><a class="links" href="{% url 'main:carrera' i.id %}">{{i}}</a></li>
+                       <li><a class="links" href="{% url 'main:one' 'carreras' i.id %}">{{i}}</a></li>
                     {%endfor%}
                 </ul>           
             </div>
@@ -62,7 +64,18 @@
                 <h2 class="title mb-0">{{ i.name }}</h2>
             </div>
             <div class="card-body">
-                <p>{{i.desc}}</p>  
+                <img href="{{i.imgs.first.img.url}}" src="" alt="">
+                <p>{{i.desc}}</p>
+                <p><span class="fw-bold">Duración: </span>{{i.duration}} años</p>
+                <p><span class="fw-bold">Modalidad: </span>{{i.modalidad}}</p>
+                {% load custom_filters %}
+                {% if not i.is_public %}
+                <span class="fw-bold"> Costo mensual: </span>
+                $ {{i.precio|to_int}} ARS
+                {% else %}
+                <span class="fw-bold"> Costo mensual: </span>
+                <span>Pública (Sin arancel)</span>
+                {% endif %}
             </div>
         </div>
     </div>
