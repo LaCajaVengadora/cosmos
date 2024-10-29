@@ -18,20 +18,25 @@ def home_view(request):
 def search_view(request):
     query = request.GET.get('q')
     cat = request.GET.get('cat'); uni = request.GET.get('uni')
-    loc = request.GET.get('loc'); price = request.GET.get('pr'); duration = request.GET.get('dur')
+    #loc = request.GET.get('loc'); price = request.GET.get('pr'); duration = request.GET.get('dur')
 
     ctx = {"unis" : Uni.objects.all(), "cats" : Cat.objects.all(), "query": None}
     carreras = Carrera.objects.all()
 
     if query and query!="": # IF THERE WAS query
         carreras = carreras.filter(
-            Q(id__icontains=query) | Q(desc__icontains=query) | Q(name__icontains=query)
+            Q(id__icontains=query) | Q(desc__icontains=query) | Q(name__icontains=query) | Q(id__icontains=query) | Q(desc__icontains=query) | Q(uni__name__icontains=query)
         )
         ctx["query"] = f"'{query}'"
     if cat: carreras = carreras.filter(cat=Cat.objects.get(id=cat))
     if uni: carreras = carreras.filter(uni=Uni.objects.get(id=uni))
-    #if loc: carreras = carreras.filter(uni=Uni.objects.filter(Q(location__icontains=loc)[0]))
+    
+    paginator = Paginator(carreras, 6)
+    page = request.GET.get('page', 1)
+    carreras = paginator.get_page(page)
+
     ctx["carreras"]=carreras # UPDATE ctx DICTIONARY WITH carreras FILTERED
+    #if loc: carreras = carreras.filter(uni=Uni.objects.filter(Q(location__icontains=loc)[0]))
     #if price: carreras.filter(price=Cat.objects.get(id=cat))
     #if duration: carreras.filter(cat=Cat.objects.get(id=cat))
 
@@ -39,9 +44,17 @@ def search_view(request):
 
 def many_view(request, type):
     ctx = {'cats':Cat.objects.all(), "type":type}
-    if type=="unis": ctx["result"]=Uni.objects.all()
-    elif type=="cursos": ctx["result"]=Curso.objects.all()
-    else: ctx["result"]=Beca.objects.all()
+    result=None
+
+    if type=="unis": result=Uni.objects.all()
+    elif type=="cursos": result=Curso.objects.all()
+    else: result=Beca.objects.all()
+
+    paginator = Paginator(result, 8)
+    page = request.GET.get('page', 1)
+    result = paginator.get_page(page)
+
+    ctx["result"]=result
     return render(request, "many.html", ctx)
 
 def one_view(request, type, id):
@@ -52,7 +65,7 @@ def one_view(request, type, id):
         ctx["cursos"]=Curso.objects.filter(uni=uni)
         ctx["becas"]=Beca.objects.filter(uni=uni)
     elif type=="cursos": ctx["one"]=Curso.objects.get(id=id)
-    elif type=="carreras": ctx["one"]=Carrera.objects.get(id=id); print(int(ctx["one"].precio))
+    elif type=="carreras": ctx["one"]=Carrera.objects.get(id=id)
     else: ctx["one"]=Beca.objects.get(id=id)
     return render(request, "one.html", ctx)
 

@@ -39,6 +39,12 @@
         </div>
 
     </div>
+
+    <section class="clear text-center mt-2">
+        {% if carreras.has_previous %}<a class="fs-1 links" href="?page={{ carreras.previous_page_number }}"><i class="fa-solid fa-arrow-left"></i></a>{% endif %}
+        <span class="mx-4"></span>
+        {% if carreras.has_next %}<a class="fs-1 links" href="?page={{ carreras.next_page_number }}"><i class="fa-solid fa-arrow-right"></i></a>{% endif %}
+    </section>
     
 
 {% endblock %}
