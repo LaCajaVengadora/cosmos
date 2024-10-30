@@ -1,18 +1,40 @@
 {% extends "base.html" %}{% block title %}Login{% endblock %}
 {% block content %}                          
 
-    <h1 class="title">Login</h1> <br>
+<div class="d-flex justify-content-center align-items-center">                         
+    <div class="card text-center" style="max-width: 100rem">
+        <div class="row">
 
-    {%if 'invalid' in request.GET%}<h3>ERROR formulario no válido!</h3>
-    {%elif 'wronguser' in request.GET%}<h3>ERROR usuario no válido!</h3>
-    {%endif%}
+            <div class="col-6">
+                {% load static %}
+              <img src="{% static 'img/login.jpg' %}" class="img-fluid h-100" alt="login">
+            </div>
 
-    <form class="card-body" action="" method="post">
-        {% csrf_token %}
-        {{form}} <br>
-        <input type="submit" value="Registrarse">
-
-
-    </form>
+            <div class="col-6">
+                <div class="card-body bg-light-reddish rounded-end">
+                    <h1 class="card-title mb-3 fw-bold">Iniciar Sesión</h1>
+                    {%if 'invalid' in request.GET%} <div class="bg-cream rounded py-2 mb-3"><h3>ERROR formulario no válido!</h3></div>
+                    {%elif 'wronguser' in request.GET%}<div class="bg-cream rounded py-2 mb-3"><h3>ERROR usuario no válido!</h3></div>
+                    {%endif%}
+                    <form class="card-body p-0" action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="me-3">
+                        {{form.as_p}}
+                        </div>
+                        <input class="btn bg-cream mt-3 w-100" type="submit" value="Iniciar Sesión">
+                        <!--
+                        <div class="col-6">
+                            <div class="form-group form-check ms-4">
+                                <input type="checkbox" class="form-check-input " id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Recordame</label>
+                            </div>
+                        </div>
+                        -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
