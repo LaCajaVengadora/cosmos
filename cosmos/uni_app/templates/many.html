@@ -8,7 +8,7 @@
         <div class="col">
             <div class="card">
                 {% if type != "becas" %}
-                <img src="{{i.imgs.first.img.url}}" class="card-img-top image-container" alt="{{i.name}}">
+                <img src="{{i.imgs.first.img.url}}" class="card-img-top" alt="{{i.name}}">
                 {%endif%}
                 <div class="card-body">
                     <a class="card-title title" href="{% url 'main:one' type i.id %}">{{i.name}}</a> 
