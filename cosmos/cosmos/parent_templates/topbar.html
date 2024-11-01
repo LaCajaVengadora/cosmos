@@ -5,18 +5,9 @@
     <i class="fa-solid fa-bars" style="font-size: 1.5rem;"></i>
 </button>
 
-<div class="collapse serif" id="navbarContent">
+<div class="collapse" id="navbarContent">
     <div class="p-4 no-line bg-cream collapse-btn">
 
-        <h2 class="fw-bold">Menú</h2>
-
-        <hr>
-        <a class="text-black fw-bold no-line" href="{% url 'main:home' %}">Home</a>
-
-        <hr>
-        <a class="text-black fw-bold no-line" href="{% url 'main:search' %}">Búsqueda</a>
-        
-        <hr>
         <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#gralMenu">General</a>
         <div class="collapse" id="gralMenu">
             <hr>
@@ -26,8 +17,8 @@
             <a class="text-black no-line fs-6" href="{% url 'main:many' 'becas' %}">Becas</a> 
         </div>
         
-
-
+        
+        
         <hr>
         <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#uniMenu">Categorías</a>
         <div class="collapse" id="uniMenu">
@@ -39,12 +30,15 @@
             </form>
             {% endfor %}
         </div>
+        
+        <hr>
+        <a class="text-black fw-bold no-line" href="{% url 'main:search' %}">Búsqueda</a>
 
         <hr>
         <a class="text-black fw-bold no-line" href="{% url 'blog:view' %}">Foro</a>
 
         <hr>
-        <a class="text-black fw-bold no-line" href="{% url 'contact:us' %}">Sobre nosotros</a>
+        <a class="text-black fw-bold no-line" href="{% url 'us' %}">Sobre nosotros</a>
 
     </div>
 </div>
@@ -58,8 +52,8 @@
 
 <div class="d-flex align-items-center ms-auto me-5">
 
-    <a class="nav-link text-secondary me-3" href="https://matias.me/nsfw/">Foro</a>
     <a class="nav-link text-secondary me-3" href="{% url 'main:home' %}">Home</a>
+    <a class="nav-link text-secondary me-3" href="https://matias.me/nsfw/">Foro</a>
 
     <div class="d-flex align-items-center">
         {% if user.is_authenticated %}

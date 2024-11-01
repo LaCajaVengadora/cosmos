@@ -3,6 +3,7 @@
 ## Versiones
 - **Versión de Python**: 3.9.4 (global)
 - **Versión de Django**: 4.2.16 (entorno virtual)
+- **Versión de Pillow**: (NaN) (entorno virtual)
 
 Se ha creado un entorno virtual y allí se ha instalado Django.
 Más explicitamente, los pasos (que yo, Lolo, hice) fueron:

@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% block title %}Home{% endblock %}
+{% extends "base.html" %}{% block title %}Cosmos{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
     
 <h1 class="serif text-center my-5" style="font-size: 4rem;">"Encontrá tu lugar <br> en el <span class="fst-italic">universo</span>"</h1>
@@ -33,13 +33,13 @@
     <div class="col-3 mb-4 card h-100">
         <div class="card-body">
             <a href="{% url 'main:search' %}" class="card-title text-center no-line fs-1 fw-bold color-reddish">Carreras</a>
-            <p class="card-text fs-6">Encuentra cursos y capacitaciones en diversas áreas que e ayudarán a complementar tus estudios y desarrollar nuevas habilidades.</p>
+            <p class="card-text fs-6">Explora las distintas opciones de carreras universitarias y descubre cuál se ajusta a tu vocación y metas profesionales.</p>
         </div>
     </div>
     <div class="col-3 mb-4 card h-100 mx-4">    
         <div class="card-body">
             <a href="{% url 'main:many' 'cursos' %}" class="card-title text-center no-line fs-1 fw-bold color-reddish">Cursos</a>
-            <p class="card-text fs-6">Explora las distintas opciones de carreras universitarias y descubre cuál se ajusta a tu vocación y metas profesionales.</p>
+            <p class="card-text fs-6">Encuentra cursos y capacitaciones en diversas áreas que e ayudarán a complementar tus estudios y desarrollar nuevas habilidades.</p>
         </div>
     </div>
     <div class="col-3 mb-4 card h-100">    
@@ -51,11 +51,16 @@
 </div>
 
 {% load custom_filters %}
-<div class="mt-5 mx-5 row">
+<div class="mt-5 mx-5 px-5 row">
     
     {% for i in cats|dictsort:"name" %}
 
     <div class="col-6 mb-4">
+        <form method="GET" action="{% url 'main:search' %}" class="border border-2 rounded-4 rounded">
+            <input type="hidden" name="cat" value="{{ i.id }}">
+            <input type="submit" class="title fs-5 btn w-100" style="border-left: 1.5rem double {{i.color}};" value="{{ i.name }}">
+        </form>
+        <!--
         <div class="card">
             <div class="card-header bg-cream" style="border-left: 1.5rem double {{i.color}};">
                 <h2 class="title mb-0">{{ i.name }}</h2>
@@ -73,7 +78,7 @@
                 </form>
                 
             </div>
-        </div>
+        </div>-->
     </div>
 
     {% endfor %}
