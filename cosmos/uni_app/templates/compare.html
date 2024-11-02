@@ -1,15 +1,16 @@
 {% extends "base.html" %}{% block title %}Comparador{% endblock %}
 {% block content %}                          
 
-<h2 class="title fs-1 mb-4">COMPARADOR</h2>
-{% if type != 'unis' %}
-<a href="{% url 'main:compare' 'unis' %}" class="btn btn-styles no-line">Cambiar a universidades</a>{%endif%}
-{% if type != 'carreras' %}
-<a href="{% url 'main:compare' 'carreras' %}" class="btn btn-styles no-line">Cambiar a carreras</a>{%endif%}
-{% if type != 'cursos' %}
-<a href="{% url 'main:compare' 'cursos' %}" class="btn btn-styles no-line">Cambiar a cursos</a>{%endif%}
-{% if type != 'becas' %}
-<a href="{% url 'main:compare' 'becas' %}" class="btn btn-styles no-line">Cambiar a becas</a>{%endif%}
+<h2 class="title fs-1 mb-4">COMPARADOR DE {{type|upper}}</h2>
+<div class="dropdown">
+    <button class="btn btn-styles dropdown-toggle" type="button" data-bs-toggle="dropdown">Cambiar comparador</button>
+    <ul class="dropdown-menu">
+        {% if type != 'unis' %}<li><a class="dropdown-item" href="{% url 'main:compare' 'unis' %}">Universidades</a></li>{%endif%}
+        {% if type != 'carreras' %}<li><a class="dropdown-item" href="{% url 'main:compare' 'carreras' %}">Carreras</a></li>{%endif%}
+        {% if type != 'cursos' %}<li><a class="dropdown-item" href="{% url 'main:compare' 'cursos' %}">Cursos</a></li>{%endif%}
+        {% if type != 'becas' %}<li><a class="dropdown-item" href="{% url 'main:compare' 'becas' %}">Becas</a></li>{%endif%}
+    </ul>
+</div>
 
 {% load custom_filters %}
 <form action="#" method="get" class="my-5">
@@ -18,7 +19,7 @@
         <div class="col-5">
             <select class="form-select" name="id1">
                 <option value="" disabled selected hidden>Selecciona una opción</option>
-                {%for i in options|dictsort:"name"%}
+                {%for i in options%}
                     <option value="{{i.id}}" {% if i.id == request.GET.id1|to_int %} selected {% endif %}>{{i}}</option>
                 {%endfor%}
             </select>
@@ -29,7 +30,7 @@
         <div class="col-5">
             <select class="form-select" name="id2">
                 <option value="" disabled selected hidden>Selecciona una opción</option>
-                {%for i in options|dictsort:"name"%}
+                {%for i in options%}
                 <option value="{{i.id}}" {% if i.id == request.GET.id2|to_int %} selected {% endif %}>{{i}}</option>
                 {%endfor%}
             </select>
@@ -37,6 +38,7 @@
         
     </div>    
 </form>
+
 
 {% if chosen %}<div class="row">
     {% if type == 'unis' %} {% for uni, carreras, cursos, becas in chosen %}
@@ -47,9 +49,9 @@
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ uni.name }}</h2>
             </div>
-            <img class="card-img-top" href="{{i.imgs.first.img.url}}"/>
+            <img class="card-img-top rounded-0" src="{{uni.imgs.first.img.url}}"/>
             <div class="card-body">
-                <p class="p-2 mb-0 text-center">{{ uni.desc }}</p>
+                <p class="p-2 mb-0">{{ uni.desc }}</p>
                 <ul>
                     {% for i in carreras %}
                        <li><a class="links" href="{% url 'main:one' 'carreras' i.id %}">{{i}}</a></li>
@@ -65,6 +67,7 @@
                        <li><a class="links" href="{% url 'main:one' 'becas' i.id %}">{{i}}</a></li>
                     {%endfor%}
                 </ul>
+                <a href="{% url 'main:one' 'unis' uni.id %}" class="btn btn-styles mb-3">Ver detalles</a>
             </div>
         </div>
     </div>
@@ -89,6 +92,7 @@
                     {% if not i.is_public %}$ {{i.precio|to_int}} ARS
                     {% else %}Pública (Sin arancel){% endif %}
                 </p>
+                <a href="{% url 'main:one' 'carreras' i.id %}" class="btn btn-styles mb-3">Ver detalles</a>
             </div>
         </div>
     </div>    
@@ -101,7 +105,7 @@
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ i.name }}</h2>
             </div>
-            <img class="card-img-top" href="{{i.imgs.first.img.url}}"/>
+            <img class="card-img-top rounded-0" src="{{i.imgs.first.img.url}}"/>
             <div class="card-body">
                 <p>{{i.desc}}</p>
                 <p style="color: {{i.cat.color}};"><span class="fw-bold text-black">Categoría: </span>{{i.cat.name}}</p>
@@ -111,6 +115,7 @@
                 {% load custom_filters %}
                 <p><span class="fw-bold">Costo mensual: </span>$ {{i.precio|to_int}} ARS</p>
                 <p><a href="{{ i.enroll }}" class="links">INSCRIBIRSE</a></p>
+                <a href="{% url 'main:one' 'cursos' i.id %}" class="btn btn-styles mb-3">Ver detalles</a>
             </div>
         </div>
     </div>
@@ -129,6 +134,7 @@
                 {% load custom_filters %}
                 <p><span class="fw-bold">Costo cubierto: </span>$ {{i.precio|to_int}} ARS</p>
                 <p><a href="{{ i.enroll }}" class="links">POSTULARSE</a></p>
+                <a href="{% url 'main:one' 'becas' i.id %}" class="btn btn-styles mb-3">Ver detalles</a>
             </div>
         </div>
     </div>

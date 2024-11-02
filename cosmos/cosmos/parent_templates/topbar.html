@@ -1,8 +1,10 @@
 <nav class="nav navbar topbar justify-content-between align-items-center container-fluid 
     text-light px-2 bg-cream">
 
+{% load static %}
+
 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-    <i class="fa-solid fa-bars" style="font-size: 1.5rem;"></i>
+    <img src="{% static 'svg/bars-solid.svg' %}" style="width: 1.25rem;"/>
 </button>
 
 <div class="collapse" id="navbarContent">
@@ -15,15 +17,13 @@
             <a class="text-black no-line fs-6" href="{% url 'main:search' %}">Carreras</a> <br>
             <a class="text-black no-line fs-6" href="{% url 'main:many' 'cursos' %}">Cursos</a> <br>
             <a class="text-black no-line fs-6" href="{% url 'main:many' 'becas' %}">Becas</a> 
-        </div>
-        
-        
+        </div>        
         
         <hr>
         <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#uniMenu">Categorías</a>
         <div class="collapse" id="uniMenu">
             <hr>
-            {% for i in cats|dictsort:"name" %}
+            {% for i in cats %}
             <form method="GET" action="{% url 'main:search' %}">
                 <input type="hidden" name="cat" value="{{ i.id }}">
                 <input class="no-style fs-6" type="submit" value="{{i}}"/> <br>
@@ -35,6 +35,16 @@
         <a class="text-black fw-bold no-line" href="{% url 'main:search' %}">Búsqueda</a>
 
         <hr>
+        <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#compMenu">Comparador</a>
+        <div class="collapse" id="compMenu">
+            <hr>
+            <a class="text-black no-line fs-6" href="{% url 'main:compare' 'unis' %}">Universidades</a> <br>
+            <a class="text-black no-line fs-6" href="{% url 'main:compare' 'carreras '%}">Carreras</a> <br>
+            <a class="text-black no-line fs-6" href="{% url 'main:compare' 'cursos' %}">Cursos</a> <br>
+            <a class="text-black no-line fs-6" href="{% url 'main:compare' 'becas' %}">Becas</a> 
+        </div>
+
+        <hr>
         <a class="text-black fw-bold no-line" href="{% url 'blog:view' %}">Foro</a>
 
         <hr>
@@ -43,7 +53,7 @@
     </div>
 </div>
 
-{% load static %}
+
 <div> <!--             REVISAR             -->
     <a href="{% url 'main:home' %}" class="nav-link">
         <img src="{% static 'img/logo.png' %}" alt="COSMOS" style="width:7.5rem; height:auto;">

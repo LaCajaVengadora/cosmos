@@ -7,25 +7,22 @@ from django.db.models import Q
 def testView(request): return render(request, "test.html", {})
 
 def home_view(request):
-
-    carreras = Carrera.objects.all() # GET ALL ITEMS ON Carrera
-    ctx = {"cats" : Cat.objects.all(), "carreras" : carreras}
-    # ↑ SAME WITH Uni & Cat; MAKE ctx DICTIONARY WITH ALL
     
-    return render(request, "home.html", ctx) # IF NOT query, RENDER home.html TEMPLATE WITH ctx
+    return render(request, "home.html", {"cats" : Cat.objects.order_by('name')})
 
 
 def search_view(request):
+    
     query = request.GET.get('q')
     cat = request.GET.get('cat'); uni = request.GET.get('uni')
     #loc = request.GET.get('loc'); price = request.GET.get('pr'); duration = request.GET.get('dur')
 
-    ctx = {"unis" : Uni.objects.all(), "cats" : Cat.objects.all(), "query": None}
-    carreras = Carrera.objects.all()
+    ctx = {"cats" : Cat.objects.order_by('name'), "unis" : Uni.objects.order_by("name"), "query": None}
+    carreras = Carrera.objects.order_by('name')
 
     if query and query!="": # IF THERE WAS query
         carreras = carreras.filter(
-            Q(id__icontains=query) | Q(desc__icontains=query) | Q(name__icontains=query) | Q(id__icontains=query) | Q(desc__icontains=query) | Q(uni__name__icontains=query)
+            Q(desc__icontains=query) | Q(name__icontains=query) | Q(uni__name__icontains=query)
         )
         ctx["query"] = f"'{query}'"
     if cat: carreras = carreras.filter(cat=Cat.objects.get(id=cat))
@@ -42,23 +39,28 @@ def search_view(request):
 
     return render(request, "search.html", ctx) # RENDER filter.html TEMPLATE WITH ctx
 
-def many_view(request, type):
-    ctx = {'cats':Cat.objects.all(), "type":type}
-    result=None
 
-    if type=="unis": result=Uni.objects.all()
-    elif type=="cursos": result=Curso.objects.all()
-    else: result=Beca.objects.all()
+def many_view(request, type):
+    
+    ctx = {'cats':Cat.objects.order_by('name'), "type":type}; result=None
+
+    if type=="unis": result=Uni.objects.order_by('name')
+    elif type=="cursos": result=Curso.objects.order_by('name')
+    else: result=Beca.objects.order_by('name')
 
     paginator = Paginator(result, 8)
     page = request.GET.get('page', 1)
     result = paginator.get_page(page)
 
     ctx["result"]=result
+
     return render(request, "many.html", ctx)
 
+
 def one_view(request, type, id):
-    ctx = {'cats':Cat.objects.all(), "type":type}
+
+    ctx = {'cats':Cat.objects.order_by('name'), "type":type}
+
     if type=="unis": 
         uni = Uni.objects.get(id=id); ctx["one"]=uni
         ctx["carreras"]=Carrera.objects.filter(uni=uni)
@@ -67,6 +69,7 @@ def one_view(request, type, id):
     elif type=="cursos": ctx["one"]=Curso.objects.get(id=id)
     elif type=="carreras": ctx["one"]=Carrera.objects.get(id=id)
     else: ctx["one"]=Beca.objects.get(id=id)
+
     return render(request, "one.html", ctx)
 
 #
@@ -90,12 +93,13 @@ def one_view(request, type, id):
 #    return render(request, "cursos.html", {'cursos':Curso.objects.all(), "cats":Cat.objects.all()})
 #
 def compare_view(request, type):
-    ctx={"type":type, "cats":Cat.objects.all(), "options":None, "chosen":None}
+
+    ctx={"type":type, "cats":Cat.objects.order_by('name'), "options":None, "chosen":None}
     
-    if type=='unis': ctx["options"]=Uni.objects.all()
-    elif type=='carreras': ctx["options"]=Carrera.objects.all()
-    elif type=='cursos': ctx["options"]=Curso.objects.all()
-    else: ctx["options"]=Beca.objects.all()
+    if type=='unis': ctx["options"]=Uni.objects.order_by('name')
+    elif type=='carreras': ctx["options"]=Carrera.objects.order_by('name')
+    elif type=='cursos': ctx["options"]=Curso.objects.order_by('name')
+    else: ctx["options"]=Beca.objects.order_by('name')
     
     id1, id2 = request.GET.get('id1'), request.GET.get('id2')
     if id1 and id2 and id1!=id2:

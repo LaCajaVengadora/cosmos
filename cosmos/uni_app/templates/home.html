@@ -2,17 +2,18 @@
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
     
 <h1 class="serif text-center my-5" style="font-size: 4rem;">"Encontrá tu lugar <br> en el <span class="fst-italic">universo</span>"</h1>
-
+{% load static %}
 <div class="d-flex justify-content-center">
     <div class="d-flex align-items-center" style="width: 50%;">
         <form class="input-group" role="search" method="GET" action="{% url 'main:search' %}">
             <button class="btn btn-styles rounded-5 z-0" type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <img src="{% static 'svg/magnifying-glass-solid.svg' %}" style="width: 1rem;"/>
             </button>
             <input class="form-control rounded-5 mx-2" type="search" name="q" placeholder="Buscar por palabras clave">
         </form>
     </div>
 </div>
+
 
 <div class="d-flex justify-content-center align-items-center my-5">
     <a class="btn btn-styles me-2" href="{% url 'main:many' 'unis'%}">VER UNIVERSIDADES</a>
@@ -27,7 +28,7 @@
           <li><a class="dropdown-item" href="{% url 'main:compare' 'cursos' %}">Cursos</a></li>
           <li><a class="dropdown-item" href="{% url 'main:compare' 'becas' %}">Becas</a></li>
         </ul>
-      </div>
+    </div>
 </div>
 
 
@@ -55,32 +56,13 @@
 {% load custom_filters %}
 <div class="mt-5 mx-5 px-5 row">
     
-    {% for i in cats|dictsort:"name" %}
+    {% for i in cats %}
 
     <div class="col-6 mb-4">
         <form method="GET" action="{% url 'main:search' %}" class="border border-2 rounded-3 rounded">
             <input type="hidden" name="cat" value="{{ i.id }}">
             <input type="submit" class="title fs-5 btn w-100" style="border-left: 1.5rem double {{i.color}};" value="{{ i.name }}">
         </form>
-        <!--
-        <div class="card">
-            <div class="card-header bg-cream" style="border-left: 1.5rem double {{i.color}};">
-                <h2 class="title mb-0">{{ i.name }}</h2>
-            </div>
-            <div class="card-body">
-
-                <ul class="mb-0">
-                    {% for j in carreras|get_by_cat:i.id %}
-                        <li class="mb-3"><a class="links" href="{% url 'main:one' 'carreras' j.id %}">{{j}}</a></li>
-                    {%endfor%}
-                </ul>
-                <form method="GET" action="{% url 'main:search' %}">
-                    <input type="hidden" name="cat" value="{{ i.id }}">
-                    <input type="submit" class="btn btn-styles" value="VER TODOS">
-                </form>
-                
-            </div>
-        </div>-->
     </div>
 
     {% endfor %}

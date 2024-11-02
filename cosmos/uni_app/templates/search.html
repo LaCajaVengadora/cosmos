@@ -1,7 +1,7 @@
 {% extends "base.html" %}{% block title %}Buscador{% endblock %}
 {% block content %}                                <!-- GETS FROM ctx: unis, cats, carreras & query -->
 
-    
+    {% load static %}
 
     <div class="row">
         <div class="col-10">
@@ -41,9 +41,9 @@
     </div>
 
     <section class="clear text-center mt-2">
-        {% if carreras.has_previous %}<a class="fs-1 links" href="?page={{ carreras.previous_page_number }}"><i class="fa-solid fa-arrow-left"></i></a>{% endif %}
+        {% if carreras.has_previous %}<a class="fs-1 links" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ carreras.previous_page_number }}"><img src="{% static 'svg/arrow-up-solid.svg' %}" style="width: 2rem; transform: rotate(-90deg);"></a>{% endif %}
         <span class="mx-4"></span>
-        {% if carreras.has_next %}<a class="fs-1 links" href="?page={{ carreras.next_page_number }}"><i class="fa-solid fa-arrow-right"></i></a>{% endif %}
+        {% if carreras.has_next %}<a class="fs-1 links" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ carreras.next_page_number }}"><img src="{% static 'svg/arrow-up-solid.svg' %}" style="width: 2rem; transform: rotate(90deg);"></a>{% endif %}
     </section>
     
 

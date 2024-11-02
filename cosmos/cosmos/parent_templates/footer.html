@@ -13,22 +13,24 @@
             </div>
         </div>
         
+        {% load static %}
+
         <div class="row justify-content-between">
             <div class="col-auto">
                 <div class="social-icons">
                     <a href="https://www.instagram.com/" class="btn btn-circle">
-                        <i class="fa-brands fa-instagram"></i>
+                        <img src="{% static 'svg/instagram-brands-solid.svg' %}" style="width: 1rem;"/>
                     </a>
                     <a href="https://www.facebook.com/" class="btn btn-circle">
-                        <i class="fa-brands fa-facebook"></i>
+                        <img src="{% static 'svg/facebook-brands-solid.svg' %}" style="width: 1rem;"/>
                     </a>
                     <a href="https://www.linkedin.com/" class="btn btn-circle">
-                        <i class="fa-brands fa-linkedin"></i>
+                        <img src="{% static 'svg/linkedin-brands-solid.svg' %}" style="width: 1rem;"/>
                     </a>
                 </div>
             </div>
             <div class="col-auto d-flex align-items-center">
-                <button class="btn btn-dark"> <i class="fa-solid fa-globe me-1"></i>Español (AR)</button>
+                <button class="btn btn-dark"><img src="{% static 'svg/globe-solid.svg' %}" style="width: 1rem;" class="me-1">Español (AR)</button>
             </div>
         </div>
 
