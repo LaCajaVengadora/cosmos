@@ -2,11 +2,14 @@
 {% block content %}                          
 
 <h2 class="title fs-1 mb-4">COMPARADOR</h2>
-{% if type == 'unis' %}
-<a href="{% url 'main:compare' 'carreras' %}" class="btn btn-styles no-line">Cambiar a carreras</a>
-{% elif type == 'carreras' %}
-<a href="{% url 'main:compare' 'unis' %}" class="btn btn-styles no-line">Cambiar a universidades</a>
-{%endif%}
+{% if type != 'unis' %}
+<a href="{% url 'main:compare' 'unis' %}" class="btn btn-styles no-line">Cambiar a universidades</a>{%endif%}
+{% if type != 'carreras' %}
+<a href="{% url 'main:compare' 'carreras' %}" class="btn btn-styles no-line">Cambiar a carreras</a>{%endif%}
+{% if type != 'cursos' %}
+<a href="{% url 'main:compare' 'cursos' %}" class="btn btn-styles no-line">Cambiar a cursos</a>{%endif%}
+{% if type != 'becas' %}
+<a href="{% url 'main:compare' 'becas' %}" class="btn btn-styles no-line">Cambiar a becas</a>{%endif%}
 
 {% load custom_filters %}
 <form action="#" method="get" class="my-5">
@@ -36,53 +39,102 @@
 </form>
 
 {% if chosen %}<div class="row">
-    
-    {% if type == 'unis' %} {% for uni, carreras in chosen %}
+    {% if type == 'unis' %} {% for uni, carreras, cursos, becas in chosen %}
+    <!--|------------------------- FOR UNIS -------------------------|-->
 
     <div class="col-6">
         <div class="card">
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ uni.name }}</h2>
             </div>
-            <p href="{{i.imgs.first.img.url}}"></p>
-            <p class="p-2 mb-0 text-center">{{ uni.desc }}</p>
+            <img class="card-img-top" href="{{i.imgs.first.img.url}}"/>
             <div class="card-body">
-                <ul class="mb-0">
+                <p class="p-2 mb-0 text-center">{{ uni.desc }}</p>
+                <ul>
                     {% for i in carreras %}
                        <li><a class="links" href="{% url 'main:one' 'carreras' i.id %}">{{i}}</a></li>
                     {%endfor%}
-                </ul>           
+                </ul>
+                <ul>
+                    {% for i in cursos %}
+                       <li><a class="links" href="{% url 'main:one' 'cursos' i.id %}">{{i}}</a></li>
+                    {%endfor%}
+                </ul>
+                <ul class="mb-0">
+                    {% for i in becas %}
+                       <li><a class="links" href="{% url 'main:one' 'becas' i.id %}">{{i}}</a></li>
+                    {%endfor%}
+                </ul>
             </div>
         </div>
     </div>
 
-    {%endfor%} {% else %} {% for i in chosen %}
-    
+    {%endfor%} {% elif type == "carreras" %} {% for i in chosen %}
+    <!--|------------------------- FOR CARRERAS -------------------------|-->
+
     <div class="col-6">
         <div class="card">
-            <div class="card-header bg-cream" style="border-left: 1.5rem double {{i.cat.color}};">
+            <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ i.name }}</h2>
             </div>
             <div class="card-body">
-                <img href="{{i.imgs.first.img.url}}" src="" alt="">
                 <p>{{i.desc}}</p>
+                <p style="color: {{i.cat.color}};"><span class="fw-bold text-black">Categoría: </span>{{i.cat.name}}</p>
+                <p><span class="fw-bold">Universidad: </span>{{i.uni.name}}</p>
                 <p><span class="fw-bold">Duración: </span>{{i.duration}} años</p>
                 <p><span class="fw-bold">Modalidad: </span>{{i.modalidad}}</p>
                 {% load custom_filters %}
-                {% if not i.is_public %}
-                <span class="fw-bold"> Costo mensual: </span>
-                $ {{i.precio|to_int}} ARS
-                {% else %}
-                <span class="fw-bold"> Costo mensual: </span>
-                <span>Pública (Sin arancel)</span>
-                {% endif %}
+                <p>
+                    <span class="fw-bold"> Costo mensual: </span>
+                    {% if not i.is_public %}$ {{i.precio|to_int}} ARS
+                    {% else %}Pública (Sin arancel){% endif %}
+                </p>
+            </div>
+        </div>
+    </div>    
+    
+    {%endfor%} {% elif type == "cursos" %} {% for i in chosen %}
+    <!--|------------------------- FOR CURSOS -------------------------|-->
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-cream">
+                <h2 class="title mb-0">{{ i.name }}</h2>
+            </div>
+            <img class="card-img-top" href="{{i.imgs.first.img.url}}"/>
+            <div class="card-body">
+                <p>{{i.desc}}</p>
+                <p style="color: {{i.cat.color}};"><span class="fw-bold text-black">Categoría: </span>{{i.cat.name}}</p>
+                <p><span class="fw-bold">Universidad: </span>{{i.uni.name}}</p>
+                <p><span class="fw-bold">Duración: </span>{{i.duration}} años</p>
+                <p><span class="fw-bold">Modalidad: </span>{{i.modalidad}}</p>
+                {% load custom_filters %}
+                <p><span class="fw-bold">Costo mensual: </span>$ {{i.precio|to_int}} ARS</p>
+                <p><a href="{{ i.enroll }}" class="links">INSCRIBIRSE</a></p>
             </div>
         </div>
     </div>
-    
-    
+
+    {%endfor%} {%else%} {% for i in chosen %}
+    <!--|------------------------- FOR BECAS -------------------------|-->
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-cream">
+                <h2 class="title mb-0">{{ i.name }}</h2>
+            </div>
+            <div class="card-body">
+                <p>{{i.desc}}</p>
+                <p><span class="fw-bold">Universidad: </span>{{i.uni.name}}</p>
+                {% load custom_filters %}
+                <p><span class="fw-bold">Costo cubierto: </span>$ {{i.precio|to_int}} ARS</p>
+                <p><a href="{{ i.enroll }}" class="links">POSTULARSE</a></p>
+            </div>
+        </div>
+    </div>
+
     {%endfor%} {%endif%}
 
-</div>{%endif%}
+</div> {%endif%}
 
 {% endblock %}

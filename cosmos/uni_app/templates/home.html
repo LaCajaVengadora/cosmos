@@ -24,6 +24,8 @@
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'main:compare' 'unis' %}">Universidades</a></li>
           <li><a class="dropdown-item" href="{% url 'main:compare' 'carreras' %}">Carreras</a></li>
+          <li><a class="dropdown-item" href="{% url 'main:compare' 'cursos' %}">Cursos</a></li>
+          <li><a class="dropdown-item" href="{% url 'main:compare' 'becas' %}">Becas</a></li>
         </ul>
       </div>
 </div>
@@ -56,7 +58,7 @@
     {% for i in cats|dictsort:"name" %}
 
     <div class="col-6 mb-4">
-        <form method="GET" action="{% url 'main:search' %}" class="border border-2 rounded-4 rounded">
+        <form method="GET" action="{% url 'main:search' %}" class="border border-2 rounded-3 rounded">
             <input type="hidden" name="cat" value="{{ i.id }}">
             <input type="submit" class="title fs-5 btn w-100" style="border-left: 1.5rem double {{i.color}};" value="{{ i.name }}">
         </form>

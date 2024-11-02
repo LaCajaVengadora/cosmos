@@ -90,17 +90,27 @@ def one_view(request, type, id):
 #    return render(request, "cursos.html", {'cursos':Curso.objects.all(), "cats":Cat.objects.all()})
 #
 def compare_view(request, type):
-    ctx={"type":type, "cats":Cat.objects.all(),
-         "options":Uni.objects.all() if type=="unis" else Carrera.objects.all(),
-         "chosen":None
-        }
+    ctx={"type":type, "cats":Cat.objects.all(), "options":None, "chosen":None}
+    
+    if type=='unis': ctx["options"]=Uni.objects.all()
+    elif type=='carreras': ctx["options"]=Carrera.objects.all()
+    elif type=='cursos': ctx["options"]=Curso.objects.all()
+    else: ctx["options"]=Beca.objects.all()
+    
     id1, id2 = request.GET.get('id1'), request.GET.get('id2')
     if id1 and id2 and id1!=id2:
         if type=="unis":
             uni1, uni2 = Uni.objects.get(id=id1), Uni.objects.get(id=id2)
-            ctx["chosen"]=zip((uni1, uni2),(Carrera.objects.filter(uni=uni1), Carrera.objects.filter(uni=uni2)))
-        else:
+            ctx["chosen"]=zip((uni1, uni2),
+                              (Carrera.objects.filter(uni=uni1), Carrera.objects.filter(uni=uni2)),
+                              (Curso.objects.filter(uni=uni1), Curso.objects.filter(uni=uni2)),
+                              (Beca.objects.filter(uni=uni1), Beca.objects.filter(uni=uni2)))
+        elif type=="carreras":
             ctx["chosen"]=(Carrera.objects.get(id=id1), Carrera.objects.get(id=id2))
+        elif type=="cursos":
+            ctx["chosen"]=(Curso.objects.get(id=id1), Curso.objects.get(id=id2))
+        else:
+            ctx["chosen"]=(Beca.objects.get(id=id1), Beca.objects.get(id=id2))
 
     return render(request, "compare.html", ctx)
 
