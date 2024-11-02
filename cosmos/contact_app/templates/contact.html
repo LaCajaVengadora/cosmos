@@ -1,6 +1,13 @@
 {% extends "base.html" %}{% block title %}Nosotros{% endblock %}
 {% block content %}                          
 
-<h2 class="title fs-1 mb-4">Somos <span class="fst-italic">cosmos</span></h2>
+{%load static%}
+<div class="video-container">
+    <video class="video-background" src="{% static 'vid/contact.mp4' %}" autoplay loop muted playsinline></video>
+    <div class="overlay"></div>
+    <div class="content text-center">
+        <h1 class="serif text-center my-5 text-white" style="font-size: 4rem;">Somos <span class="fst-italic">cosmos</span></h1>
+    </div>
+</div>
 
 {% endblock %}
