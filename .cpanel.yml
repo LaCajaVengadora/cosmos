@@ -1,5 +1,11 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/valucosmos/public_html/
-    - /bin/cp -R cosmos/ $DEPLOYPATH
+  
+    - ./virtualenv/bin/pip install -r requirements.txt
+    
+    - ./virtualenv/bin/python cosmos/manage.py migrate
+    
+    - ./virtualenv/bin/python cosmos/manage.py collectstatic --noinput
+    
+    - touch /home/valucosmos/repositories/cosmos/cosmos/cosmos/wsgi.py
