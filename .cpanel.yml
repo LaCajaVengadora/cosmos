@@ -1,0 +1,12 @@
+---
+deployment:
+  tasks:
+    - /usr/local/bin/python3 -m venv venv
+    - source venv/bin/activate
+    
+    - pip install -r requirements.txt
+    
+    - python cosmos/manage.py migrate
+    - python cosmos/manage.py collectstatic --noinput
+    
+    - systemctl restart cosmos
