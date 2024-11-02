@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/valucosmos/public_html/
+    - /bin/rsync -av cosmos/ $DEPLOYPATH
