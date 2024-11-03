@@ -1,9 +1,52 @@
-{% extends "base.html" %}{% block title %}Register{% endblock %}
-{% block content %}                          
+{% extends "base.html" %}{% block title %}Foro{% endblock %}
+{% block content %}                                <!-- GETS FROM ctx: unis, cats, carreras & query -->
 
-    <h1>Blog</h1> <br>
+    {% load static %}
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum repellat sint molestias ea eum maiores ducimus, ipsum qui, rem omnis dignissimos natus quia laborum! Praesentium voluptatibus ullam magni ipsam mollitia.
-    Temporibus ullam magnam, fugit est natus reprehenderit voluptatibus repellendus sed error cumque, incidunt dolorum sequi consectetur ipsa iure, tenetur qui id aut optio quasi corrupti ducimus fugiat obcaecati. Dolores, labore.</p>
+    <h2 class="title fs-1 mb-4">Foro</h2>
+
+    <div class="row">
+
+        <div class="col-3 bg-cream sticky-col">
+            <h2>TO-DO: FILTER & SEARCH</h2>
+        </div>
+
+        <div class="col-9">
+            {% for i in posts %}
+                <div class="card mb-4">
+                    
+                    <div class="card-header"><h2 class="card-title mb-0 title">{{i.title}}</h2></div>
+
+                    <div class="card-body">
+                        <p>{{i.content}}</p><p class="text-secondary mb-0 fs-6">{{i.date}}</p>
+                    </div>
+
+                    <div class="card-footer py-3">
+                        <h5 class="mb-2 fw-bold">Comentarios</h5>
+                        <ul class="fs-6">
+                            {% for j in i.comments.all|dictsortreversed:"date" %}
+                            <li><span class="fw-bold">{{j.author}}</span> ({{j.date}}): {{j.content}}</li>
+                            {% empty %}<li>No hay comentarios</li>{% endfor %}
+                        </ul>
+                        <form action="#" method="post" class="input-group">
+                            <input type="submit" class="btn btn-styles z-0" value="Comentar">
+                            <input class="form-control rounded-end-4" name="comment" placeholder="Escribe un comentario...">
+                            <input type="hidden" name="post" value={{i.id}}>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+
+                </div>
+                
+            {%empty%} <h4 class="title">No hay posts disponibles</h4> {%endfor%}
+
+            <section class="clear text-center mt-2">
+                {% if posts.has_previous %}<a class="fs-1 links" href="?page={{ posts.previous_page_number }}"><img src="{% static 'svg/arrow-up-solid.svg' %}" style="width: 2rem; transform: rotate(-90deg);"></a>{% endif %}
+                <span class="mx-4"></span>
+                {% if posts.has_next %}<a class="fs-1 links" href="?page={{ posts.next_page_number }}"><img src="{% static 'svg/arrow-up-solid.svg' %}" style="width: 2rem; transform: rotate(90deg);"></a>{% endif %}
+            </section>
+        </div>
+
+    </div>
 
 {% endblock %}

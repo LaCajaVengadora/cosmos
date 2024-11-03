@@ -23,6 +23,8 @@ body {font-family: 'Garet', sans-serif; font-size: larger;}
 
 .social-icons {display: flex; gap: .5rem;}
 
+.sticky-col{position: sticky; top: 5rem; height: 20rem;}
+
 /* --- BG COLORS --- */
 .bg-reddish{background-color: #5A0000;}
 .bg-light-reddish{background-color: #8d1515; color: white;}
