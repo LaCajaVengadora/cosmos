@@ -27,3 +27,15 @@ def blog_view(request):
     ctx["posts"]=posts
 
     return render(request, 'blog.html', ctx)
+
+
+@login_required(login_url='auth:login')
+def make_view(request): 
+
+    if request.method=='POST':
+        # TO-DO
+        return redirect('blog:view')
+    
+    ctx = {"cats":Cat.objects.order_by("name"), "topics":Topic.objects.order_by("name")}
+
+    return render(request, 'make.html', ctx)
