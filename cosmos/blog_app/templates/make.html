@@ -10,21 +10,21 @@
         <form action="#" method="POST" class="bg-cream col-6 rounded offset-3 p-4">
             <div class="row">
                 <div class="col-6">
-                    <h3 for="exampleInputEmail1" class="form-label">Título</h3>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <h3 for="titleInput" class="form-label">Título</h3>
+                    <input type="text" class="form-control" id="titleInput" name="title" required>
                 </div>
                 <div class="col-6">
                     <h3 for="topics" class="form-label">Tópicos</h3>
-                    <select class="form-select" multiple id="topics">
+                    <select class="form-select" multiple id="topics" name="topics" required>
                         {%for i in topics%}<option value={{i.id}}>{{i.name}}</option>{%endfor%}
                     </select>
                 </div>
             </div>
             <div class="mb-3">
-                <h3 for="exampleFormControlTextarea1" class="form-label">Contenido</h3>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <h3 for="contentInput" class="form-label">Contenido</h3>
+                <textarea class="form-control" id="contentInput" rows="6" name="content" required></textarea>
             </div>
-            <button type="submit" class="btn btn-styles">POSTEAR</button>
+            <button type="submit" class="btn btn-styles">POSTEAR</button>{% csrf_token %}
         </form>
 
     </div>

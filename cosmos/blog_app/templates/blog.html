@@ -3,7 +3,7 @@
 
     {% load static %}
 
-    <h2 class="title fs-1 mb-4">Foro</h2>
+    <h2 class="title fs-1 mb-4">Foro</h2> <a href="{% url 'blog:make' %}" class="btn btn-styles">Crea tu post</a>
 
     <div class="row">
 
@@ -18,7 +18,11 @@
                     <div class="card-header"><h2 class="card-title mb-0 title">{{i.title}}</h2></div>
 
                     <div class="card-body">
-                        <p>{{i.content}}</p><p class="text-secondary mb-0 fs-6">{{i.date}}</p>
+                        <p class="text-secondary fs-6">
+                            {%for j in i.topic.all%} <span class="py-1 px-2 rounded bg-cream fs-6">{{j.name}}</span> {%endfor%}
+                        </p>
+                        <p>{{i.content}}</p>
+                        <p class="text-secondary mb-0 fs-6">{{i.date}}</p>
                     </div>
 
                     <div class="card-footer py-3">

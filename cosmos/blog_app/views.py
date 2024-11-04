@@ -33,7 +33,12 @@ def blog_view(request):
 def make_view(request): 
 
     if request.method=='POST':
-        # TO-DO
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+        topics = request.POST.getlist("topics")
+        user = request.user;
+        p = Post.objects.create(title=title, content=content, author=user)
+        p.topic.set(topics)
         return redirect('blog:view')
     
     ctx = {"cats":Cat.objects.order_by("name"), "topics":Topic.objects.order_by("name")}
