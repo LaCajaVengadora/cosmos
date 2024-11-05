@@ -23,7 +23,7 @@
         <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#uniMenu">Categorías</a>
         <div class="collapse" id="uniMenu">
             <hr>
-            {% for i in cats %}
+            {% for i in cats|dictsort:"name" %}
             <form method="GET" action="{% url 'main:search' %}">
                 <input type="hidden" name="cat" value="{{ i.id }}">
                 <input class="no-style fs-6" type="submit" value="{{i}}"/> <br>
