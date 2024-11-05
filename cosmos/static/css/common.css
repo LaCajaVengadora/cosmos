@@ -23,7 +23,7 @@ body {font-family: 'Garet', sans-serif; font-size: larger;}
 
 .social-icons {display: flex; gap: .5rem;}
 
-.sticky-col{position: sticky; top: 5rem; height: 20rem;}
+.sticky-col{position: sticky; top: 5rem; height: 17.5rem;}
 
 /* --- BG COLORS --- */
 .bg-reddish{background-color: #5A0000;}

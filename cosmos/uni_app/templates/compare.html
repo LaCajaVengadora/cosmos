@@ -52,22 +52,28 @@
             <img class="card-img-top rounded-0" src="{{uni.imgs.first.img.url}}"/>
             <div class="card-body">
                 <p class="p-2 mb-0">{{ uni.desc }}</p>
+                <h3>Carreras</h3>
                 <ul>
                     {% for i in carreras %}
                        <li><a class="links" href="{% url 'main:one' 'carreras' i.id %}">{{i}}</a></li>
+                       {%empty%} <li>No hay becas disponibles</li>
                     {%endfor%}
                 </ul>
+                <h3>Cursos</h3>
                 <ul>
                     {% for i in cursos %}
                        <li><a class="links" href="{% url 'main:one' 'cursos' i.id %}">{{i}}</a></li>
+                       {%empty%} <li>No hay becas disponibles</li>
                     {%endfor%}
                 </ul>
+                <h3>Becas</h3>
                 <ul class="mb-0">
                     {% for i in becas %}
                        <li><a class="links" href="{% url 'main:one' 'becas' i.id %}">{{i}}</a></li>
+                       {%empty%} <li>No hay becas disponibles</li>
                     {%endfor%}
                 </ul>
-                <a href="{% url 'main:one' 'unis' uni.id %}" class="btn btn-styles mb-3">Ver detalles</a>
+                <a href="{% url 'main:one' 'unis' uni.id %}" class="btn btn-styles mt-3">Ver detalles</a>
             </div>
         </div>
     </div>
@@ -92,7 +98,7 @@
                     {% if not i.is_public %}$ {{i.precio|to_int}} ARS
                     {% else %}Pública (Sin arancel){% endif %}
                 </p>
-                <a href="{% url 'main:one' 'carreras' i.id %}" class="btn btn-styles mb-3">Ver detalles</a>
+                <a href="{% url 'main:one' 'carreras' i.id %}" class="btn btn-styles">Ver detalles</a>
             </div>
         </div>
     </div>    
@@ -115,7 +121,7 @@
                 {% load custom_filters %}
                 <p><span class="fw-bold">Costo mensual: </span>$ {{i.precio|to_int}} ARS</p>
                 <p><a href="{{ i.enroll }}" class="links">INSCRIBIRSE</a></p>
-                <a href="{% url 'main:one' 'cursos' i.id %}" class="btn btn-styles mb-3">Ver detalles</a>
+                <a href="{% url 'main:one' 'cursos' i.id %}" class="btn btn-styles">Ver detalles</a>
             </div>
         </div>
     </div>
@@ -134,7 +140,7 @@
                 {% load custom_filters %}
                 <p><span class="fw-bold">Costo cubierto: </span>$ {{i.precio|to_int}} ARS</p>
                 <p><a href="{{ i.enroll }}" class="links">POSTULARSE</a></p>
-                <a href="{% url 'main:one' 'becas' i.id %}" class="btn btn-styles mb-3">Ver detalles</a>
+                <a href="{% url 'main:one' 'becas' i.id %}" class="btn btn-styles">Ver detalles</a>
             </div>
         </div>
     </div>
