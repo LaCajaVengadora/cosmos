@@ -1,8 +1,58 @@
-{% extends "base.html" %}{% block title %}Perfil{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}Perfil{% endblock %}
+
 {% block content %}                          
 
-    <h1 class="title">Perfil</h1> <br>
+<div class="container mt-5">
+    <h1 class="title text-center mb-4">Perfil</h1>
+    <div class="text-center">
+        {% load static %}
+        <img src="{% static 'img/perfil.png' %}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;" alt="Perfil"/>
+    </div>
+    <br>
 
-    <p>User: {{user.username}}</p>
+    <form action="{% url 'auth:profile' %}" method="POST" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="nombre_completo" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" value="{{ user.profile.nombre_completo }}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="nacimiento" class="form-label">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="nacimiento" name="nacimiento" value="{{ user.profile.nacimiento }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Número de teléfono</label>
+            <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ user.profile.telefono }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="pais" class="form-label">País de residencia</label>
+            <input type="text" class="form-control" id="pais" name="pais" value="{{ user.profile.pais }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="interes" class="form-label">Áreas de interés</label>
+            <select class="form-select" id="interes" name="interes" multiple required>
+                {% for area in cats|dictsort:"name" %}
+                    <option value="{{ area.id }}" {% if area.id in user.profile.interes %} selected {% endif %}>{{ area.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="text-center">
+            <input type="submit" value="Actualizar Perfil" class="btn btn-styles">
+        </div>
+    </form>
+</div>
 
 {% endblock %}
