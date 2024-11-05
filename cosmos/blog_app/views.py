@@ -12,13 +12,19 @@ def blog_view(request):
     if request.method=='POST':
         post = request.POST.get("post")
         content = request.POST.get("comment")
-        user = request.user;
+        user = request.user
         Comment.objects.create(post=Post.objects.get(id=post), content=content, author=user)
         return redirect('blog:view')
-    
-    ctx = {"cats":Cat.objects.order_by("name")}
 
+    query = request.GET.get('q'); topic = request.GET.get('topic')
+    
+    ctx = {"cats":Cat.objects.order_by("name"), "topics":Topic.objects.order_by("name"),"query" : None}
     posts = Post.objects.order_by("-date")
+
+    if query and query!="": # IF THERE WAS query
+        posts = posts.filter(Q(title__icontains=query))
+        ctx["query"] = f"'{query}'"
+    if topic: posts = posts.filter(topic=Topic.objects.get(id=topic))
 
     paginator = Paginator(posts, 2)
     page = request.GET.get('page', 1)

@@ -5,10 +5,12 @@
 
     <h2 class="title fs-1 mb-4">Foro</h2> <a href="{% url 'blog:make' %}" class="btn btn-styles">Crea tu post</a>
 
-    <div class="row">
+    {% if query %}<h1 class="my-3">BUSCANDO POR {{query}}</h1>{% endif %}
 
-        <div class="col-3 bg-cream sticky-col">
-            <h2>TO-DO: FILTER & SEARCH</h2>
+    <div class="row mt-4">
+
+        <div class="col-3 bg-cream sticky-col rounded-end">
+            {% include "widgets/topic_filter.html" %}
         </div>
 
         <div class="col-9">
@@ -22,7 +24,7 @@
                             {%for j in i.topic.all%} <span class="py-1 px-2 rounded bg-cream fs-6">{{j.name}}</span> {%endfor%}
                         </p>
                         <p>{{i.content}}</p>
-                        <p class="text-secondary mb-0 fs-6">{{i.date}}</p>
+                        <p class="text-secondary mb-0 fs-6">{{i.author.username}} - {{i.date}}</p>
                     </div>
 
                     <div class="card-footer py-3">

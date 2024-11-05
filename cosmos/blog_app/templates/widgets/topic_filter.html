@@ -1,0 +1,28 @@
+
+<div class="bg-cream rounded-start p-3 text-center">
+
+    <h2 class="text-center text-black title">FILTROS</h2>
+
+    <a href="{% url 'blog:view' %}" class="btn btn-counter">LIMPIAR</a> <!--GOES TO search WITH NO FILTER NOR QUERY-->
+
+    {% load custom_filters %}
+    <form method="GET" action="{% url 'blog:view' %}">
+
+        <button class="btn btn-styles my-2" type="submit">APLICAR</button>
+
+        <!--<input type="hidden" name="q" value="{{request.GET.q}}">  HIDDEN INPUT TO KEEP query -->
+        <input class="form-control rounded-5" type="search" name="q" placeholder="Buscar...">
+
+        <div class="form-floating pt-2">
+            <select id="topic" name="topic" class="form-select {% if request.GET.topic %} bg-light-reddish {% endif %}">
+                <option value="">Todas</option>
+                {% for i in topics %}
+                    <option value="{{i.id}}" {% if i.id == request.GET.topic|to_int %} selected {% endif %}>{{i.name}}</option>                    
+                {% endfor %}
+            </select>
+            <label for="topic" class="fw-bold fs-6 text-black z-0">TÓPICO</label>
+        </div>
+
+    </form>
+    
+</div>
