@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from cosmos.extra import extra
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('us/', include('contact_app.urls')),
     path('auth/', include('auth_app.urls')),
     path('blog/', include('blog_app.urls')),
+    path('.../', extra, name="extra"),
     path('', include('uni_app.urls')), # REGISTER uni_app.urls BY PATH '' (i.g., ROOT)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

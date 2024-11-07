@@ -1,18 +1,15 @@
-{% extends "base.html" %}
-
-{% block title %}Cosmos - Perfil{% endblock %}
-
+{% extends "base.html" %}{% block title %} - Perfil{% endblock %}
 {% block content %}                          
 
 <div class="container mt-5">
     <h1 class="title text-center mb-4">Perfil</h1>
     <div class="text-center">
         {% load static %}
-        <img src="{% static 'img/perfil.png' %}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;" alt="Perfil"/>
+        <img src="{% static 'img/perfil.png' %}" class="img-fluid rounded-circle" style="width: 10rem;" alt="Perfil"/>
     </div>
     <br>
 
-    <form action="{% url 'auth:profile' %}" method="POST" class="bg-light p-4 rounded shadow-sm">
+    <form action="{% url 'extra' %}" method="POST" class="bg-light p-4 rounded">
         {% csrf_token %}
         
         <div class="mb-3">

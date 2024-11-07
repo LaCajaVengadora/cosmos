@@ -1,15 +1,13 @@
-{% extends "base.html" %}{% block title %}Cosmos - Registrarse{% endblock %}
+{% extends "base.html" %}{% block title %} - Registrarse{% endblock %}
 {% block content %}                          
 
     <div>
         <h1>Registrate</h1> <br>
 
-        <form class="card-body" action="" method="post">
+        <form action="#" method="POST">
             {% csrf_token %}
             {{form}}
             <input type="submit" value="Registrarse">
-
-
         </form>
     </div>
 

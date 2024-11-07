@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% block title %}Cosmos{% endblock %}
+{% extends "base.html" %}{% block title %}{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: unis, cats & carreras -->
     
 <h1 class="serif text-center my-5" style="font-size: 4rem;">"Encontrá tu lugar <br> en el <span class="fst-italic">universo</span>"</h1>
@@ -13,7 +13,6 @@
         </form>
     </div>
 </div>
-
 
 <div class="d-flex justify-content-center align-items-center my-5">
     <a class="btn btn-styles me-2" href="{% url 'main:many' 'unis'%}">VER UNIVERSIDADES</a>
@@ -30,7 +29,6 @@
         </ul>
     </div>
 </div>
-
 
 <div class="row mb-3 justify-content-center">
     <div class="col-3 mb-4 card h-100">
@@ -53,66 +51,60 @@
     </div>
 </div>
 
-{% load custom_filters %}
-<div class="mt-5 mx-5 px-5 row">
-    
-    {% for i in cats %}
 
+{% load custom_filters %}
+<div class="mt-5 mx-5 px-5 row"> 
+    {% for i in cats %}
     <div class="col-6 mb-4">
         <form method="GET" action="{% url 'main:search' %}" class="border border-2 rounded-3 rounded">
             <input type="hidden" name="cat" value="{{ i.id }}">
             <input type="submit" class="title fs-5 btn w-100" style="border-left: 1.5rem double {{i.color}};" value="{{ i.name }}">
         </form>
     </div>
-
     {% endfor %}
-    
 </div>    
 
-<br>
 
-<div class="section bg-reddish text-white py-5">
-    <h2 class="title text-center mb-3">¡Conoce a nuestros usuarios!</h2>
-    <p class="section-text text-center mb-4">Estas son algunas experiencias de nuestros usuarios con Cosmos.</p>
-    <div class="card-container d-flex justify-content-center gap-3">
-        <div class="col-3 mb-5 card p-3 text-center bg-cream text-black">
-            <h3 class="title mt-2 mb-2">Pablo</h3>
-            <div class="stars">★★★★★</div>
+<div class="rounded p-5 bg-reddish text-white my-5 text-center">
+    <h2 class="title">¡Conocé a nuestros usuarios!</h2>
+    <p class="mt-3 mb-4">Estas son algunas experiencias de nuestros usuarios con Cosmos.</p>
+    <div class="d-flex justify-content-center gap-4 text-center">
+        <div class="col-3 rounded p-3 bg-cream">
+            <h3 class="title my-2">Pablo</h3>
+            <div style="color: #FFD700;">★★★★★</div>
             <p>"Cosmos me ayudó a encontrar lo que estaba buscando. Excelente plataforma!"</p>
         </div>
-        <div class="col-3 mb-5 card p-3 text-center bg-cream text-black">
-            <h3 class="title mt-2 mb-2">Martina</h3>
-            <div class="stars">★★★★★</div>
+        <div class="col-3 rounded p-3 bg-cream">
+            <h3 class="title my-2">Martina</h3>
+            <div style="color: #FFD700;">★★★★★</div>
             <p>"Muy útil y fácil de usar. Recomendado para estudiantes que buscan oportunidades."</p>
         </div>
-        <div class="col-3 mb-5 card p-3 text-center bg-cream text-black">
-            <h3 class="title mt-2 mb-2">Julia</h3>
-            <div class="stars">★★★★☆</div>
+        <div class="col-3 rounded p-3 bg-cream">
+            <h3 class="title my-2">Julia</h3>
+            <div style="color: #FFD700;">★★★★☆</div>
             <p>"Cosmos me ayudó a encontrar becas y cursos que nunca hubiera descubierto solo."</p>
         </div>
     </div>
 </div>
 
-<br>
-
-<div class="section bg-cream w-100 py-5 text-black">
-    <h2 class="title text-center mb-3">Beneficios exclusivos</h2>
-    <p class="section-text text-center mb-4">Sé una estrella con Cosmos Premium</p>
-    <div class="card-container d-flex justify-content-center gap-4">
-        <div class="col-3 mb-4 card p-3 text-center justify-content-center">
+<div class="rounded p-5 bg-cream text-center">
+    <h2 class="title">Beneficios exclusivos</h2>
+    <p class="mt-3 mb-4">Sé una estrella con Cosmos Premium</p>
+    <div class="d-flex justify-content-center gap-4 text-center">
+        <div class="col-3 rounded p-3 bg-light">
             <h3 class="title">Foro exclusivo</h3>
             <p>Conectate con otros usuarios para compartir experiencias.</p>
-            <a class="btn btn-styles me-2" style="border-radius: 25px;" href="#">VER FORO</a>
+            <a class="btn btn-styles" href="{% url 'blog:view' %}">VER FORO</a>
         </div>
-        <div class="col-3 mb-4 card p-3 text-center justify-content-center">
+        <div class="col-3 rounded p-3 bg-light">
             <h3 class="title">Apuntes a tu alcance</h3>
-            <p>Accedé a una variedad de materiales académicos.</p>
-            <a class="btn btn-styles me-2" style="border-radius: 25px;" href="#">VER MATERIAL</a>
+            <p>Accedé a una variedad de materiales académicos de utilidad.</p>
+            <a class="btn btn-styles" href="{% url 'extra' %}">VER MATERIAL</a>
         </div>
-        <div class="col-3 mb-4 card p-3 text-center justify-content-center">
+        <div class="col-3 rounded p-3 bg-light">
             <h3 class="title">Elegí tus favoritos</h3>
             <p>Lleva un registro de las carreras y cursos que más te interesan.</p>
-            <a class="btn btn-styles me-2" style="border-radius: 25px;" href="#">VER FAVORITOS</a>
+            <a class="btn btn-styles" href="{% url 'extra' %}">VER FAVORITOS</a>
         </div>
     </div>
 </div>
