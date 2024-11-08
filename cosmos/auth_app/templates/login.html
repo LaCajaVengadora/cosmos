@@ -1,13 +1,13 @@
 {% extends "base.html" %}{% block title %} - Login{% endblock %}
 {% block content %}                          
 
-<div class="d-flex justify-content-center align-items-center pt-4">                         
-    <div class="card text-center" style="max-width: 100rem">
+<div class="d-flex justify-content-center align-items-center pt-4" style="height: 70vh">                         
+    <div class="card text-center" style="align-self: center;">
         <div class="row">
 
-            <div class="col-6 d-flex flex-column justify-content-center">
+            <div class="col-6 d-flex justify-content-center">
                 {% load static %}
-              <img src="{% static 'img/login.jpg' %}" class="img-fluid object-fit-contain" alt="login">
+              <img src="{% static 'img/login.jpg' %}" style="width:14rem; height:auto;" alt="login">
             </div>
 
             <div class="col-6">
@@ -18,7 +18,7 @@
                     {%endif%}
                     <form class="card-body p-0" action="#" method="POST">
                         {% csrf_token %}
-                        <div class="me-3">
+                        <div class="mx-3">
                         {{form.as_p}}
                         </div>
                         <input class="btn btn-counter mt-3 w-100" type="submit" value="Iniciar Sesión">

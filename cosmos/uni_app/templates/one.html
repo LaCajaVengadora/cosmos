@@ -3,20 +3,19 @@
 
     {% if type == "unis" %}
 
-        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 97.9vw;">
+        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 100wv;">
             <img src="{{one.imgs.first.img.url}}" alt="{{one}}" class="video-background">
             <div class="overlay text-white d-flex justify-content-center" style="align-items: center;">
-                <h1 class="title">{{one.name}}</h1>
+                <h1 class="title" >{{one.name}}</h1>
             </div>
         </div>
 
         <div class="px-5">
             <p class="my-3">{{one.desc}}</p>
-            
-            <h5 class="mb-3">
+            <div class="mb-3">
                 <span class="title fs-3">Tipo: </span> {{one.tipo}}<br>
                 <span class="title fs-3">Ubicación: </span> {{one.location}}
-            </h5>
+            </div>
             
             <h3 class="title">CARRERAS: </h3>
             {%if carreras%}<ul>{% for i in carreras %}<li><a href="{% url 'main:one' 'carreras' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
@@ -31,21 +30,19 @@
 
     {% elif type == "carreras" %}
 
-        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 97.9vw;">
+        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 100wv; border: 1rem double {{one.cat.color}}; border-top: 0;">
             <img src="{{one.uni.imgs.first.img.url}}" alt="{{one}}" class="video-background">
             <div class="overlay text-white d-flex justify-content-center" style="align-items: center;">
                 <div class="text-center">
                     <h1 class="title">{{one.name}}</h1>
-                    <h1 class="title fs-4">{{one.cat.name}}</h1>
+                    <h1 class="title fs-5">{{one.cat.name}}</h1>
                     <a class="title fs-4 btn-styles no-line p-2" href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>
                 </div>
             </div>
         </div>
         
-        
         <div class="px-5">
-            <p>{{one.desc}}</p>
-
+            <p class="my-3">{{one.desc}}</p>
             {% load custom_filters %}
             <div>
                 {% if not one.is_public %}
@@ -53,41 +50,56 @@
                 {% endif %}
                 <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
                 <span class="title fs-3">Duración:</span> {{ one.duration }} años
-                <p class="fs-5">Para más información, consule la página oficial de la institución</p>
             </div>
+            <p class="mt-3 fs-5">Para más información, consule la página oficial de la institución</p>
         </div>
 
     {% elif type == "cursos" %}
 
-        <h3 class="title">Universidad: <a href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>Categoría: {{one.cat.name}}</h3>
-        <img src="{{one.imgs.first.img.url}}" alt="{{one}}" style="height: 20rem; width: auto;">
+        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 100wv; border: 1rem double {{one.cat.color}}; border-top: 0;">
+            <img src="{{one.imgs.first.img.url}}" alt="{{one}}" class="video-background">
+            <div class="overlay text-white d-flex justify-content-center" style="align-items: center;">
+                <div class="text-center">
+                    <h1 class="title">{{one.name}}</h1>
+                    <h1 class="title fs-5">{{one.cat.name}}</h1>
+                    <a class="title fs-4 btn-styles no-line p-2" href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>
+                </div>
+            </div>
+        </div>
 
         <div class="px-5">
-            <p>{{one.desc}}</p>
-            
+            <p class="my-3">{{one.desc}}</p>
             {% load custom_filters %}
             <div>
                 <span class="title fs-3">Precio:</span> ${{ one.precio|to_int }} pesos<br>
                 <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
                 <span class="title fs-3">Duración:</span> {{ one.duration }} meses<br>
                 <a class="title fs-3" href="{{ one.enroll }}">Inscribirse</a>
-                <p class="fs-5">Para más información, consule la página oficial de la institución</p>
             </div>
+            <p class=" mt-3 fs-5">Para más información, consule la página oficial de la institución</p>
         </div>
 
     {% elif type == "becas" %}
 
-        <h3 class="title">Universidad: <a href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a></h3>
+        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 100wv;">
+            <img src="{{one.uni.imgs.first.img.url}}" alt="{{one}}" class="video-background">
+            <div class="overlay text-white d-flex justify-content-center" style="align-items: center;">
+                <div class="text-center">
+                    <h1 class="title">{{one.name}}</h1>
+                    <a class="title fs-4 btn-styles no-line p-2" href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>
+                </div>
+            </div>
+        </div>
+
         
         <div class="px-5">
-            <p>{{one.desc}}</p>
-
+            <p class="my-3">{{one.desc}}</p>
             {% load custom_filters %}
             <div>
                 <span class="title fs-3">Beca por:</span> ${{ one.precio|to_int }} pesos<br>
                 <a class="title fs-3" href="{{ one.enroll }}">Postularse</a>
-                <p class="fs-5">Para más información, consule la página oficial de la institución</p>
             </div>
+            <p class="mt-3 fs-5">Para más información, consule la página oficial de la institución</p>
         </div>
 
     {%endif%}
