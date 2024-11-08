@@ -1,12 +1,17 @@
 {% extends "base.html" %}{% block title %} - {{one}}{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: carrera -->
-
-    <h1 class="title">{{one.name}}</h1> <br>
-
+<div class="z-2">
     {% if type == "unis" %}
 
+        <div class="video-container" style="height: 20rem;">
+            <img src="{{one.imgs.first.img.url}}" alt="{{one}}" class="video-background">
+            <div class="overlay text-white text-center" style="align-items: center;">
+                <h1 class="title">{{one.name}}</h1>
+            </div>
+        </div>
+
         <p>{{one.desc}}</p>
-        <img src="{{one.imgs.first.img.url}}" alt="{{one}}" style="height: 20rem; width: auto;">
+        
         <h5>
             <span class="title fs-3">Tipo: </span> {{one.tipo}}<br>
             <span class="title fs-3">Ubicación: </span> {{one.location}}
@@ -52,5 +57,5 @@
 
     {%endif%}
 
-
+</div>
 {% endblock %}
