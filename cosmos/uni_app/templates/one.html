@@ -1,61 +1,95 @@
 {% extends "base.html" %}{% block title %} - {{one}}{% endblock %}
 {% block content %}                          <!-- GETS FROM ctx: carrera -->
-<div class="z-2">
+
     {% if type == "unis" %}
 
-        <div class="video-container" style="height: 20rem;">
+        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 97.9vw;">
             <img src="{{one.imgs.first.img.url}}" alt="{{one}}" class="video-background">
-            <div class="overlay text-white text-center" style="align-items: center;">
+            <div class="overlay text-white d-flex justify-content-center" style="align-items: center;">
                 <h1 class="title">{{one.name}}</h1>
             </div>
         </div>
 
-        <p>{{one.desc}}</p>
+        <div class="px-5">
+            <p class="my-3">{{one.desc}}</p>
+            
+            <h5 class="mb-3">
+                <span class="title fs-3">Tipo: </span> {{one.tipo}}<br>
+                <span class="title fs-3">Ubicación: </span> {{one.location}}
+            </h5>
+            
+            <h3 class="title">CARRERAS: </h3>
+            {%if carreras%}<ul>{% for i in carreras %}<li><a href="{% url 'main:one' 'carreras' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
+            {%else%}<p>No hay carreras disponibles</p>{%endif%}
+            <h3 class="title">CURSOS: </h3>
+            {%if cursos%}<ul>{% for i in cursos %}<li><a href="{% url 'main:one' 'cursos' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
+            {%else%}<p>No hay cursos disponibles</p>{%endif%}
+            <h3 class="title">BECAS: </h3>
+            {%if becas%}<ul>{% for i in becas %}<li><a href="{% url 'main:one' 'becas' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
+            {%else%}<p>No hay becas disponibles</p>{%endif%}
+        </div>
+
+    {% elif type == "carreras" %}
+
+        <div class="video-container rounded-4 rounded-top-0" style="height: 20rem; width: 97.9vw;">
+            <img src="{{one.uni.imgs.first.img.url}}" alt="{{one}}" class="video-background">
+            <div class="overlay text-white d-flex justify-content-center" style="align-items: center;">
+                <div class="text-center">
+                    <h1 class="title">{{one.name}}</h1>
+                    <h1 class="title fs-4">{{one.cat.name}}</h1>
+                    <a class="title fs-4 btn-styles no-line p-2" href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>
+                </div>
+            </div>
+        </div>
         
-        <h5>
-            <span class="title fs-3">Tipo: </span> {{one.tipo}}<br>
-            <span class="title fs-3">Ubicación: </span> {{one.location}}
-        </h5>
-        <br>
-        <h3 class="title">CARRERAS: </h3>
-        {%if carreras%}<ul>{% for i in carreras %}<li><a href="{% url 'main:one' 'carreras' i.id %}">{{i}}</a></li>{% endfor %}</ul>
-        {%else%}<p>No hay carreras disponibles</p>{%endif%}
-        <h3 class="title">CURSOS: </h3>
-        {%if cursos%}<ul>{% for i in cursos %}<li><a href="{% url 'main:one' 'cursos' i.id %}">{{i}}</a></li>{% endfor %}</ul>
-        {%else%}<p>No hay cursos disponibles</p>{%endif%}
-        <h3 class="title">BECAS: </h3>
-        {%if becas%}<ul>{% for i in becas %}<li><a href="{% url 'main:one' 'becas' i.id %}">{{i}}</a></li>{% endfor %}</ul>
-        {%else%}<p>No hay becas disponibles</p>{%endif%}
-
-    {% else %}
-
-        <h3 class="title">Universidad: <a href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>
-            {%if type != "becas"%}| Categoría: {{one.cat.name}} {%endif%}</h3>
         
-        <p>{{one.desc}}</p>
-        {%if type == "cursos"%}<img src="{{one.imgs.first.img.url}}" alt="{{one}}" style="height: 20rem; width: auto;">{%endif%}
+        <div class="px-5">
+            <p>{{one.desc}}</p>
 
-        {% load custom_filters %}
-        <div>
-            {% if type == "carreras" %}
+            {% load custom_filters %}
+            <div>
                 {% if not one.is_public %}
                     <span class="title fs-3">Precio:</span> ${{ one.precio|to_int }} pesos<br>
                 {% endif %}
                 <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
                 <span class="title fs-3">Duración:</span> {{ one.duration }} años
-            {% elif type == "cursos" %}
+                <p class="fs-5">Para más información, consule la página oficial de la institución</p>
+            </div>
+        </div>
+
+    {% elif type == "cursos" %}
+
+        <h3 class="title">Universidad: <a href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a>Categoría: {{one.cat.name}}</h3>
+        <img src="{{one.imgs.first.img.url}}" alt="{{one}}" style="height: 20rem; width: auto;">
+
+        <div class="px-5">
+            <p>{{one.desc}}</p>
+            
+            {% load custom_filters %}
+            <div>
                 <span class="title fs-3">Precio:</span> ${{ one.precio|to_int }} pesos<br>
                 <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
                 <span class="title fs-3">Duración:</span> {{ one.duration }} meses<br>
                 <a class="title fs-3" href="{{ one.enroll }}">Inscribirse</a>
-            {% else %}
+                <p class="fs-5">Para más información, consule la página oficial de la institución</p>
+            </div>
+        </div>
+
+    {% elif type == "becas" %}
+
+        <h3 class="title">Universidad: <a href="{% url 'main:one' 'unis' one.uni.id %}">{{one.uni.name}}</a></h3>
+        
+        <div class="px-5">
+            <p>{{one.desc}}</p>
+
+            {% load custom_filters %}
+            <div>
                 <span class="title fs-3">Beca por:</span> ${{ one.precio|to_int }} pesos<br>
                 <a class="title fs-3" href="{{ one.enroll }}">Postularse</a>
-            {% endif %}
-            <p class="fs-5">Para más información, consule la página oficial de la institución</p>
+                <p class="fs-5">Para más información, consule la página oficial de la institución</p>
+            </div>
         </div>
 
     {%endif%}
 
-</div>
 {% endblock %}
