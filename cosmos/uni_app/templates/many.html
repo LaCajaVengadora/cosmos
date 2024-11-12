@@ -8,7 +8,7 @@
     <div class="row row-cols-4 g-4">
         {% for i in result %}
         <div class="col">
-            <div class="card">
+            <div class="card h-100">
                 {% if type != "becas" %}
                 <img src="{{i.imgs.first.img.url}}" class="card-img-top" alt="{{i.name}}">
                 {%endif%}

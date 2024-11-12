@@ -11,21 +11,47 @@
         </div>
 
         <div class="px-5">
-            <p class="my-3">{{one.desc}}</p>
-            <div class="mb-3">
-                <span class="title fs-3">Tipo: </span> {{one.tipo}}<br>
-                <span class="title fs-3">Ubicación: </span> {{one.location}}
+            <p class="my-5">{{one.desc}}</p>
+
+            <div class="row bg-light-reddish my-5 py-3 justify-content-center gap-5 rounded-3 text-center">
+                <div class="col-4 bg-cream rounded-3 py-2">
+                    <span class="title fs-3">Tipo: </span> {{one.tipo}}
+                </div>
+                <div class="col-4 bg-cream rounded-3 py-2">
+                    <span class="title fs-3">Ubicación: </span> {{one.location}}
+                </div>
             </div>
             
-            <h3 class="title">CARRERAS: </h3>
-            {%if carreras%}<ul>{% for i in carreras %}<li><a href="{% url 'main:one' 'carreras' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
-            {%else%}<p>No hay carreras disponibles</p>{%endif%}
-            <h3 class="title">CURSOS: </h3>
-            {%if cursos%}<ul>{% for i in cursos %}<li><a href="{% url 'main:one' 'cursos' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
-            {%else%}<p>No hay cursos disponibles</p>{%endif%}
-            <h3 class="title">BECAS: </h3>
-            {%if becas%}<ul>{% for i in becas %}<li><a href="{% url 'main:one' 'becas' i.id %}" class="links">{{i}}</a></li>{% endfor %}</ul>
-            {%else%}<p>No hay becas disponibles</p>{%endif%}
+            <div class="row justify-content-center gap-5">
+                <div class="card col-3 p-0">
+                    <div class="card-header bg-cream">
+                        <h3 class="card-title title mb-0">CARRERAS</h3>
+                    </div>
+                    <div class="card-body">
+                        {%if carreras%}<ul>{% for i in carreras %}<li><a href="{% url 'main:one' 'carreras' i.id %}" class="links">{{i.name}}</a></li>{% endfor %}</ul>
+                        {%else%}<p>No hay carreras disponibles</p>{%endif%}
+                    </div>
+                </div>
+                <div class="card col-3 p-0">
+                    <div class="card-header bg-cream">
+                        <h3 class="card-title title mb-0">CURSOS</h3>
+                    </div>
+                    <div class="card-body">
+                        {%if cursos%}<ul>{% for i in cursos %}<li><a href="{% url 'main:one' 'cursos' i.id %}" class="links">{{i.name}}</a></li>{% endfor %}</ul>
+                        {%else%}<p>No hay cursos disponibles</p>{%endif%}
+                    </div>
+                </div>
+                <div class="card col-3 p-0">
+                    <div class="card-header bg-cream">
+                        <h3 class="card-title title mb-0">BECAS</h3>
+                    </div>
+                    <div class="card-body">
+                        {%if becas%}<ul>{% for i in becas %}<li><a href="{% url 'main:one' 'becas' i.id %}" class="links">{{i.name}}</a></li>{% endfor %}</ul>
+                        {%else%}<p>No hay becas disponibles</p>{%endif%}
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     {% elif type == "carreras" %}
@@ -42,17 +68,36 @@
         </div>
         
         <div class="px-5">
+
             <p class="my-3">{{one.desc}}</p>
+
             {% load custom_filters %}
-            <div>
-                {% if not one.is_public %}
-                    <span class="title fs-3">Precio:</span> ${{ one.precio|to_int }} pesos<br>
-                {% endif %}
-                <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
-                <span class="title fs-3">Duración:</span> {{ one.duration }} años
+            <div class="bg-light-reddish row my-5 py-3 justify-content-center gap-5 rounded-3 text-center">
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <div>
+                        <span class="title fs-3">Precio: </span> {% if not one.is_public %}${{ one.precio|to_int }} pesos{%else%}no arancelado{%endif%}
+                    </div>
+                </div>
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-book-open-reader fs-1"></i>
+                    <div>
+                        <span class="title fs-3">Modalidad: </span> {{one.modalidad}}
+                    </div>
+                </div>
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <span class="title fs-3">Duración: </span> {{one.duration}} años
+                    </div>
+                </div>
             </div>
+            
             <p class="mt-3 fs-5">Para más información, consulte la página oficial de la institución.</p>
+
         </div>
+
+        
 
     {% elif type == "cursos" %}
 
