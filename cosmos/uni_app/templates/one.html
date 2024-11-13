@@ -74,19 +74,19 @@
             {% load custom_filters %}
             <div class="bg-light-reddish row my-5 py-3 justify-content-center gap-5 rounded-3 text-center">
                 <div class="col-3 bg-cream rounded-3 py-2">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <i class="fa-solid fa-file-invoice-dollar fs-1"></i>
                     <div>
-                        <span class="title fs-3">Precio: </span> {% if not one.is_public %}${{ one.precio|to_int }} pesos{%else%}no arancelado{%endif%}
+                        <span class="title fs-3">Precio: </span> {% if not one.is_public %}${{ one.precio|to_int }} pesos{%else%}Sin arancel{%endif%}
                     </div>
                 </div>
                 <div class="col-3 bg-cream rounded-3 py-2">
                     <i class="fa-solid fa-book-open-reader fs-1"></i>
                     <div>
-                        <span class="title fs-3">Modalidad: </span> {{one.modalidad}}
+                        <span class="title fs-3">Modalidad: </span>{{one.modalidad}}
                     </div>
                 </div>
                 <div class="col-3 bg-cream rounded-3 py-2">
-                    <i class="fa-solid fa-clock"></i>
+                    <i class="fa-solid fa-clock fs-1"></i>
                     <div>
                         <span class="title fs-3">Duración: </span> {{one.duration}} años
                     </div>
@@ -115,13 +115,29 @@
         <div class="px-5">
             <p class="my-3">{{one.desc}}</p>
             {% load custom_filters %}
-            <div>
-                <span class="title fs-3">Precio:</span> ${{ one.precio|to_int }} pesos<br>
-                <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
-                <span class="title fs-3">Duración:</span> {{ one.duration }} meses<br>
-                <a class="title fs-3" href="{{ one.enroll }}">Inscribirse</a>
+
+            <div class="bg-light-reddish row my-5 py-3 justify-content-center gap-5 rounded-3 text-center">
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-file-invoice-dollar fs-1"></i>
+                    <div>
+                        <span class="title fs-3">Precio:</span> ${{ one.precio|to_int }} pesos<br>
+                    </div>
+                </div>
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-book-open-reader fs-1"></i>
+                    <div>
+                        <span class="title fs-3">Modalidad:</span> {{ one.modalidad }}<br>
+                    </div>
+                </div>
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-clock fs-1"></i>
+                    <div>
+                        <span class="title fs-3">Duración:</span> {{ one.duration }} meses<br>
+                    </div>
+                </div>
             </div>
             <p class=" mt-3 fs-5">Para más información, consulte la página oficial de la institución.</p>
+            <a class="btn btn-styles title fs-3" href="{{ one.enroll }}">Inscribirse</a>
         </div>
 
     {% elif type == "becas" %}
@@ -140,11 +156,16 @@
         <div class="px-5">
             <p class="my-3">{{one.desc}}</p>
             {% load custom_filters %}
-            <div>
-                <span class="title fs-3">Beca por:</span> ${{ one.precio|to_int }} pesos<br>
-                <a class="title fs-3" href="{{ one.enroll }}">Postularse</a>
+            <div class="bg-light-reddish row my-5 py-3 justify-content-center gap-5 rounded-3 text-center">
+                <div class="col-3 bg-cream rounded-3 py-2">
+                    <i class="fa-solid fa-file-invoice-dollar fs-1"></i>
+                    <div>
+                        <span class="title fs-3">Beca por:</span> ${{ one.precio|to_int }} pesos<br>
+                    </div>
+                </div>
             </div>
             <p class="mt-3 fs-5">Para más información, consulte la página oficial de la institución.</p>
+            <a class="btn btn-styles title fs-3" href="{{ one.enroll }}">Postularse</a>
         </div>
 
     {%endif%}
