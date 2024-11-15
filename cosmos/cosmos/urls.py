@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from cosmos.extra import extra
+from cosmos.extra import extra, git
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), path('git/', git, name="git")
     path('us/', include('contact_app.urls')),
     path('auth/', include('auth_app.urls')),
     path('blog/', include('blog_app.urls')),
