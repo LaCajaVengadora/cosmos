@@ -26,7 +26,7 @@ def blog_view(request):
         ctx["query"] = f"'{query}'"
     if topic: posts = posts.filter(topic=Topic.objects.get(id=topic))
 
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 4)
     page = request.GET.get('page', 1)
     posts = paginator.get_page(page)
 

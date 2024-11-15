@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from uni_app.models import Carrera, Cat, Uni, Curso, Beca
 from django.db.models import Q
@@ -46,7 +46,8 @@ def many_view(request, type):
 
     if type=="unis": result=Uni.objects.order_by('name')
     elif type=="cursos": result=Curso.objects.order_by('name')
-    else: result=Beca.objects.order_by('name')
+    elif type=="becas": result=Beca.objects.order_by('name')
+    else: return redirect("extra")
 
     paginator = Paginator(result, 8)
     page = request.GET.get('page', 1)
@@ -66,9 +67,15 @@ def one_view(request, type, id):
         ctx["carreras"]=Carrera.objects.filter(uni=uni)
         ctx["cursos"]=Curso.objects.filter(uni=uni)
         ctx["becas"]=Beca.objects.filter(uni=uni)
-    elif type=="cursos": ctx["one"]=Curso.objects.get(id=id)
-    elif type=="carreras": ctx["one"]=Carrera.objects.get(id=id)
-    else: ctx["one"]=Beca.objects.get(id=id)
+    elif type=="cursos":
+        curso = Curso.objects.get(id=id)
+        ctx["one"]=curso; ctx["related"]=Curso.objects.filter(cat=curso.cat).exclude(id=id)[:3]
+    elif type=="carreras":
+        carrera = Carrera.objects.get(id=id)
+        ctx["one"]=carrera; ctx["related"]=Carrera.objects.filter(cat=carrera.cat).exclude(id=id)[:3]
+    elif type=="becas":
+        ctx["one"]=Beca.objects.get(id=id)
+    else: return redirect("extra")
 
     return render(request, "one.html", ctx)
 
