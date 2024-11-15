@@ -21,7 +21,7 @@ from django.conf import settings
 from cosmos.extra import extra, git
 
 urlpatterns = [
-    path('admin/', admin.site.urls), path('git/', git, name="git")
+    path('admin/', admin.site.urls), path('git/', git, name="git"),
     path('us/', include('contact_app.urls')),
     path('auth/', include('auth_app.urls')),
     path('blog/', include('blog_app.urls')),
