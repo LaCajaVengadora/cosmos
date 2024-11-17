@@ -3,23 +3,21 @@
 
 {% load static %}
 
-<button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+<button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarContent">
     <img src="{% static 'svg/bars-solid.svg' %}" style="width: 1.25rem;"/>
 </button>
 
-<div class="collapse" id="navbarContent">
-    <div class="p-4 no-line bg-cream collapse-btn rounded">
+<div class="offcanvas offcanvas-start no-line bg-cream" data-bs-scroll="true" tabindex="-1" id="navbarContent">
+    <div class="offcanvas-body">
 
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         <div class="text-center">
             {% load static %}
-                <a href="{% url 'auth:profile' %}"><img src="{% static 'img/perfil.png' %}" class="img-fluid rounded-circle" style="width: 7rem; border: 0.25rem solid #5A0000" alt="Perfil"/></a>
-                <div class="my-4">
-                {% if user.is_authenticated %}
-                <a class="btn btn-styles me-2" href="{% url 'auth:logout' %}">Cerrar sesión</a>
-                {% else %}
-                <a class="btn btn-styles me-2" href="{% url 'auth:login' %}">Iniciar sesión</a>
-                {% endif %}
-        </div>
+            <a href="{% url 'auth:profile' %}"><img src="{% static 'img/perfil.png' %}" class="img-fluid rounded-circle" style="width: 8rem; border: 0.33rem solid #5A0000" alt="Perfil"/></a>
+            <div class="my-4">
+                {% if user.is_authenticated %}<a class="btn btn-styles me-2" href="{% url 'auth:logout' %}">Cerrar sesión</a>
+                {% else %}<a class="btn btn-styles me-2" href="{% url 'auth:login' %}">Iniciar sesión</a>{% endif %}
+            </div>
         </div>
 
         <a class="text-black fw-bold no-line dropdown-toggle" href="" data-bs-toggle="collapse" data-bs-target="#gralMenu">General</a>
@@ -61,7 +59,7 @@
 
         <hr>
         <a class="text-black fw-bold no-line" href="{% url 'us' %}">Sobre nosotros</a>
-
+        
     </div>
 </div>
 
