@@ -1,13 +1,37 @@
 {% extends "base.html" %}{% block title %} - Registrarse{% endblock %}
 {% block content %}                          
 
-    <div class="pt-4">
-        <h1>Registrate</h1> <br>
+    <div class="pt-5 p-5">
+        <h1 class="title">Registrate</h1>
+
+        {% load static %}
+        {% if messages %}
+        <br>
+        <div class="d-flex alert alert-light" role="alert" style="font-size: 1rem; padding: 10px;">
+            <img src="{% static 'svg/exclamation-triangle.svg' %}" style="width: 2rem; margin-right: 15px;"/>
+            {% for message in messages %}
+                <p class="mb-0 title text-black" style="font-size: 1.5rem;">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <br>
 
         <form action="#" method="POST">
-            {% csrf_token %}
-            {{form}}
-            <input type="submit" value="Registrarse">
+            <div class="card-body bg-cream rounded p-4">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group mb-3">
+                        <span class="title" style="font-size: 1.4rem;">{{ field.label_tag }} <br> </span>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="error-message"> <br> {{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <input class="btn btn-styles" type="submit" value="Registrarse">
         </form>
     </div>
 
