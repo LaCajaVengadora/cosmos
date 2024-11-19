@@ -1,3 +1,15 @@
+/* --- RESPONSIVE SIZES --- */
+html {font-size: 16px;}
+@media (max-width: 768px) {
+    html {font-size: 10px;}
+}
+@media (max-width: 454px) {
+    html {font-size: 8px;}
+}
+@media (max-width: 364px) {
+    html {font-size: 6px;}
+}
+
 
 /* --- FONTS IMPORT --- */
 @font-face{font-family: 'League'; src: url('/static/fonts/LeagueSpartan-Bold.ttf') format('truetype');}
