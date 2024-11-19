@@ -1,0 +1,32 @@
+---
+#deployment:
+#  tasks:
+#  
+#    - ./virtualenv/bin/pip install -r requirements.txt
+#    
+#    - ./virtualenv/bin/python cosmos/manage.py migrate
+#    
+#    - ./virtualenv/bin/python cosmos/manage.py collectstatic --noinput
+#    
+#    - touch /home/valucosmos/repositories/cosmos/cosmos/cosmos/wsgi.py
+
+on: 
+  push:
+    branches:
+      - main
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: cosmos.net.ar
+        username: myFtpUserName
+        password: ${{ secrets.ftp_password }}
+        server-dir: /home/valucosmos/repositories/cosmos/cosmos
