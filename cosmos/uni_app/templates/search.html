@@ -4,14 +4,14 @@
     {% load static %}
 
     <div class="row pt-4">
-        <div class="col-10">
+        <div class="col-8 col-sm-10">
             {% if query %}<h1 class="mb-3">BUSCANDO POR {{query}}</h1>{% endif %}        <!-- SHOWS query if any -->
             <h1 class="title mb-4">CARRERAS:</h1> <!-- SHOWS ALL carreras FILTERED -->
 
             {% if carreras %}
                 <div class="row">
                     {% for carrera in carreras %}
-                        <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
+                        <div class="col-lg-4 col-sm-6 col-12 mb-4">
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title mb-0 fs-3 title">{{ carrera.name }}</h3>
@@ -34,7 +34,7 @@
             {% endif %}
         </div>
         
-        <div class="col-2 p-0 sticky-col">
+        <div class="col-4 col-sm-2 p-0 sticky-col">
             {% include "widgets/filters.html" %}
         </div>
 

@@ -5,16 +5,16 @@
     <div class="card text-center" style="align-self: center;">
         <div class="row">
 
-            <div class="col-6 d-flex justify-content-center">
+            <div class="col-6 pe-0 d-flex justify-content-center">
                 {% load static %}
               <img src="{% static 'img/login.jpg' %}" style="width:14rem; height:auto;" alt="login">
             </div>
 
-            <div class="col-6">
+            <div class="col-6 ps-0">
                 <div class="card-body bg-cream rounded-end py-5">
-                    <h1 class="card-title mb-3 fw-bold">Iniciar Sesión</h1>
-                    {%if 'invalid' in request.GET%} <div class="bg-light rounded py-2 mb-3"><p>Nombre de usuario y/o <br> contraseña incorrectos.</p></div>
-                    {%elif 'wronguser' in request.GET%}<div class="bg-light rounded py-2 mb-3"><p>Nombre de usuario y/o <br> contraseña incorrectos.</p></div>
+                    <h1 class="card-title title mb-3 fw-bold">Iniciar Sesión</h1>
+                    {%if 'invalid' in request.GET%} <div class="bg-light rounded py-2 mb-3"><p>Formulario invalido.<br>Intente nuevamente.</p></div>
+                    {%elif 'wronguser' in request.GET%}<div class="bg-light rounded py-2 mb-3"><p>Nombre de usuario y/o<br>contraseña incorrectos.</p></div>
                     {%endif%}
                     <form class="card-body p-0" action="#" method="POST">
                         {% csrf_token %}

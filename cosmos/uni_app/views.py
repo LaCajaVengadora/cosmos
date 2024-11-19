@@ -49,7 +49,7 @@ def many_view(request, type):
     elif type=="becas": result=Beca.objects.order_by('name')
     else: return redirect("extra")
 
-    paginator = Paginator(result, 8)
+    paginator = Paginator(result, 12)
     page = request.GET.get('page', 1)
     result = paginator.get_page(page)
 

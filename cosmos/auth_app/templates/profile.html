@@ -4,11 +4,10 @@
 {% load static %}
 
 <div class="container mt-5 pt-4">
-    <h1 class="title text-center p-4 mb-4">PERFIL</h1>
-    <div class="text-center">
-        <a href="{% url 'extra' %}"><img src="{% static 'img/banner.png' %}" class="w100" style="align-self: center;"/></a>
+    <h1 class="title text-center p-4">PERFIL</h1>
+    <div class="text-center my-5">
+        <a href="{% url 'extra' %}"><img src="{% static 'img/banner.png' %}" class="w-75" style="align-self: center;"/></a>
     </div>
-    <br><br>
 
     <form action="{% url 'extra' %}" method="POST" class="bg-light p-4 rounded">
         {% csrf_token %}

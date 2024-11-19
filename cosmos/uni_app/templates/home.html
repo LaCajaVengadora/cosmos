@@ -30,20 +30,20 @@
     </div>
 </div>
 
-<div class="row mb-3 justify-content-center gap-4">
-    <div class="col-sm-3 col-xs-8 mb-4 card h-100">
+<div class="row mb-4 justify-content-center gap-4">
+    <div class="col-sm-3 col-8 card h-100">
         <div class="text-center card-body">
             <a href="{% url 'main:search' %}" class="card-title no-line fs-1 fw-bold color-reddish">Carreras</a>
             <p class="card-text fs-6">Explora entre las distintas opciones de carreras universitarias o terciarias y descubre cuál se ajusta a tu vocación y metas profesionales.</p>
         </div>
     </div>
-    <div class="col-sm-3 col-xs-8 mb-4 card h-100">    
+    <div class="col-sm-3 col-8 card h-100">    
         <div class="text-center card-body">
             <a href="{% url 'main:many' 'cursos' %}" class="card-title no-line fs-1 fw-bold color-reddish">Cursos</a>
             <p class="card-text fs-6">Encuentra cursos y capacitaciones en diversas áreas que te ayudarán a complementar tus estudios y así desarrollar nuevas habilidades.</p>
         </div>
     </div>
-    <div class="col-sm-3 col-xs-8 mb-4 card h-100">    
+    <div class="col-sm-3 col-8 card h-100">    
         <div class="text-center card-body">
             <a href="{% url 'main:many' 'becas' %}" class="card-title no-line fs-1 fw-bold color-reddish">Becas</a>
             <p class="card-text fs-6">Descubre oportunidades de becas disponibles para financiar tus estudios y alcanzar tus sueños académicos sin preocupaciones económicas.</p>
@@ -55,7 +55,7 @@
 {% load custom_filters %}
 <div class="mt-5 mx-5 px-5 row"> 
     {% for i in cats %}
-    <div class="col-xs-12 col-sm-6 mb-4">
+    <div class="col-12 col-sm-6 mb-4">
         <form method="GET" action="{% url 'main:search' %}" class="border border-2 rounded-3 rounded">
             <input type="hidden" name="cat" value="{{ i.id }}">
             <input type="submit" class="title fs-5 btn w-100" style="border-left: 1.5rem double {{i.color}};" value="{{ i.name }}">
@@ -69,17 +69,17 @@
     <h2 class="title">¡Conocé a nuestros usuarios!</h2>
     <p class="mt-3 mb-4">Estas son algunas experiencias de nuestros usuarios con Cosmos.</p>
     <div class="row justify-content-center gap-4 text-center">
-        <div class="col-xs-12 col-sm-3 rounded p-3 bg-cream">
+        <div class="col-8 col-sm-3 rounded p-3 bg-cream">
             <h3 class="title my-2">Pablo</h3>
             <div style="color: #FFD700;">★★★★★</div>
             <p>"Cosmos me ayudó a encontrar lo que estaba buscando. Excelente plataforma!"</p>
         </div>
-        <div class="col-xs-12 col-sm-3 rounded p-3 bg-cream">
+        <div class="col-8 col-sm-3 rounded p-3 bg-cream">
             <h3 class="title my-2">Martina</h3>
             <div style="color: #FFD700;">★★★★★</div>
             <p>"Muy útil y fácil de usar. Recomendado para estudiantes que buscan oportunidades."</p>
         </div>
-        <div class="col-xs-8 col-sm-3 rounded p-3 bg-cream">
+        <div class="col-8 col-sm-3 rounded p-3 bg-cream">
             <h3 class="title my-2">Julia</h3>
             <div style="color: #FFD700;">★★★★☆</div>
             <p>"Cosmos me ayudó a encontrar becas y cursos que nunca hubiera descubierto sola."</p>
@@ -91,17 +91,17 @@
     <h2 class="title">Beneficios exclusivos</h2>
     <p class="mt-3 mb-4">Sé una estrella con Cosmos Premium</p>
     <div class="row justify-content-center gap-4 text-center">
-        <div class="col-xs-12 col-sm-3 rounded p-3 bg-light">
+        <div class="col-8 col-sm-3 rounded p-3 bg-light">
             <h3 class="title">Foro exclusivo</h3>
             <p>Conectate con otros usuarios para compartir experiencias.</p>
             <a class="btn btn-styles" href="{% url 'blog:view' %}">VER FORO</a>
         </div>
-        <div class="col-xs-12 col-sm-3 rounded p-3 bg-light">
+        <div class="col-8 col-sm-3 rounded p-3 bg-light">
             <h3 class="title">Apuntes a tu alcance</h3>
             <p>Accedé a una variedad de materiales académicos.</p>
             <a class="btn btn-styles" href="{% url 'extra' %}">VER MATERIAL</a>
         </div>
-        <div class="col-xs-12 col-sm-3 rounded p-3 bg-light">
+        <div class="col-8 col-sm-3 rounded p-3 bg-light">
             <h3 class="title">Elegí tus favoritos</h3>
             <p>Lleva un registro de las carreras y cursos que más te interesan.</p>
             <a class="btn btn-styles" href="{% url 'extra' %}">VER FAVORITOS</a>

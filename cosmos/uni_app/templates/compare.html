@@ -45,13 +45,13 @@
     <!--|------------------------- FOR UNIS -------------------------|-->
 
     <div class="col-6">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ uni.name }}</h2>
             </div>
             <img class="card-img-top rounded-0" src="{{uni.imgs.first.img.url}}"/>
             <div class="card-body">
-                <p class="p-2 mb-0">{{ uni.desc }}</p>
+                <p class="p-2 mb-0">{{ uni.desc|slice:":100" }}...</p>
                 <h3>Carreras</h3>
                 <ul>
                     {% for i in carreras %}
@@ -82,12 +82,12 @@
     <!--|------------------------- FOR CARRERAS -------------------------|-->
 
     <div class="col-6">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ i.name }}</h2>
             </div>
             <div class="card-body">
-                <p>{{i.desc}}</p>
+                <p>{{i.desc|slice:":100"}}...</p>
                 <p style="color: {{i.cat.color}};"><span class="fw-bold text-black">Categoría: </span>{{i.cat.name}}</p>
                 <p><span class="fw-bold">Universidad: </span>{{i.uni.name}}</p>
                 <p><span class="fw-bold">Duración: </span>{{i.duration}} años</p>
@@ -107,13 +107,13 @@
     <!--|------------------------- FOR CURSOS -------------------------|-->
 
     <div class="col-6">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ i.name }}</h2>
             </div>
             <img class="card-img-top rounded-0" src="{{i.imgs.first.img.url}}"/>
             <div class="card-body">
-                <p>{{i.desc}}</p>
+                <p>{{i.desc|slice:":100"}}...</p>
                 <p style="color: {{i.cat.color}};"><span class="fw-bold text-black">Categoría: </span>{{i.cat.name}}</p>
                 <p><span class="fw-bold">Universidad: </span>{{i.uni.name}}</p>
                 <p><span class="fw-bold">Duración: </span>{{i.duration}} años</p>
@@ -130,12 +130,12 @@
     <!--|------------------------- FOR BECAS -------------------------|-->
 
     <div class="col-6">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header bg-cream">
                 <h2 class="title mb-0">{{ i.name }}</h2>
             </div>
             <div class="card-body">
-                <p>{{i.desc}}</p>
+                <p>{{i.desc|slice:":100"}}...</p>
                 <p><span class="fw-bold">Universidad: </span>{{i.uni.name}}</p>
                 {% load custom_filters %}
                 <p><span class="fw-bold">Costo cubierto: </span>$ {{i.precio|to_int}} ARS</p>
