@@ -27,6 +27,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: cosmos.net.ar
-        username: myFtpUserName
+        username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
         server-dir: /home/valucosmos/repositories/cosmos/cosmos
