@@ -52,10 +52,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cosmos.urls'
 
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['uni_app/templates', 'cosmos/parent_templates', 'auth_app/templates', 'blog_app/templates', 'contact_app/templates'],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'cosmos', 'parent_templates'), 
+                 # Ruta a parent_templates
+            os.path.join(BASE_DIR, 'uni_app', 'templates'),  # Ruta a uni_app/templates (si existe)
+            os.path.join(BASE_DIR, 'auth_app', 'templates'),
+            os.path.join(BASE_DIR, 'blog_app', 'templates'),
+            os.path.join(BASE_DIR, 'contact_app', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +76,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'cosmos.wsgi.application'
 
@@ -116,12 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    #"cosmos/static"
-]
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [BASE_DIR / 'cosmos' / 'static',]
 
 
 # Default primary key field type
@@ -135,5 +142,5 @@ EMAIL_HOST = 'smtp.gmail.com'; EMAIL_USE_TLS = True; EMAIL_PORT = 587
 EMAIL_HOST_USER='schrodingernoreply@gmail.com'; EMAIL_HOST_PASSWORD='svya dujl eega xmjm'
 
 # MEDIA (IMGS OF models) SETTINGS
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
-MEDIA_ROOT =  BASE_DIR / 'media'
