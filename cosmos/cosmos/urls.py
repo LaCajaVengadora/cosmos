@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from cosmos.extra import extra, git
+from cosmos.extra import *
 
 urlpatterns = [
     path('admin/', admin.site.urls), path('git/', git, name="git"),
@@ -28,3 +28,7 @@ urlpatterns = [
     path('.../', extra, name="extra"),
     path('', include('uni_app.urls')), # REGISTER uni_app.urls BY PATH '' (i.g., ROOT)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+#Error handers
+handler500 = custom_500_view; handler404 = custom_404_view; handler403 = custom_403_view; handler400 = custom_400_view

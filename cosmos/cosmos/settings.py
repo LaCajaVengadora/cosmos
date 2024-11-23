@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o+5#j=tbncf4f#z0f6((2pc26e!+s!yv$foq-+-%)-#r8bmju+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.56.1', "127.0.0.1", "192.168.27.18", "192.168.70.3", "192.168.1.159", "cosmos.net.ar", "www.cosmos.net.ar", "app.cosmos.net.ar", "192.168.27.16"]
+ALLOWED_HOSTS = ['192.168.56.1', "127.0.0.1", "cosmos.net.ar", "www.cosmos.net.ar", "app.cosmos.net.ar"]
 
 # Application definition
 
@@ -57,9 +57,8 @@ import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'cosmos', 'parent_templates'), 
-                 # Ruta a parent_templates
+        'DIRS': [ #'uni_app/templates', 'cosmos/parent_templates', 'auth_app/templates', 'blog_app/templates', 'contact_app/templates',
+            os.path.join(BASE_DIR, 'cosmos', 'parent_templates'), # Ruta a parent_templates
             os.path.join(BASE_DIR, 'uni_app', 'templates'),  # Ruta a uni_app/templates (si existe)
             os.path.join(BASE_DIR, 'auth_app', 'templates'),
             os.path.join(BASE_DIR, 'blog_app', 'templates'),
@@ -116,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-ar'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 USE_I18N = True
 
@@ -126,9 +125,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# FOR PROD
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [BASE_DIR / 'cosmos' / 'static',]
+
+# FOR DEV
+# STATIC_URL = 'static/'
+# STATICFILES_DIRS = [BASE_DIR / "static",]
 
 
 # Default primary key field type

@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %} - {{status}}{% endblock %}
+{% block content %}                          
+
+{%load static%}
+<br>
+<div class="my-5 py-5 text-center">
+    <h1 style="font-size: 3rem;">Ha ocurrido un error <br> ERROR {{status}}</h1>
+    <a href="{% url 'main:home' %}" class="btn btn-styles fs-2 mt-2">Vuelve al HOME</a>
+</div>
+{% endblock %}
