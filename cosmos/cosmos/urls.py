@@ -27,7 +27,7 @@ urlpatterns = [
     path('blog/', include('blog_app.urls')),
     path('.../', extra, name="extra"),
     path('', include('uni_app.urls')), # REGISTER uni_app.urls BY PATH '' (i.g., ROOT)
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] # THIS REMOVED FOR PROD + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 #Error handers

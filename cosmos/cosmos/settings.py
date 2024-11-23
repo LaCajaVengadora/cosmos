@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-o+5#j=tbncf4f#z0f6((2pc26e!+s!yv$foq-+-%)-#r8bmju+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.56.1', "127.0.0.1", "cosmos.net.ar", "www.cosmos.net.ar", "app.cosmos.net.ar"]
+ALLOWED_HOSTS = ["127.0.0.1", "cosmos.net.ar", "www.cosmos.net.ar", "app.cosmos.net.ar"]
 
 # Application definition
 
@@ -125,14 +125,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# FOR PROD
+# FOR PROD, execute python manage.py collectstatic
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [BASE_DIR / 'cosmos' / 'static',]
-
-# FOR DEV
-# STATIC_URL = 'static/'
-# STATICFILES_DIRS = [BASE_DIR / "static",]
+STATIC_ROOT = STATIC_ROOT = '/home/valucosmos/public_html/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static',]
 
 
 # Default primary key field type
@@ -146,5 +142,6 @@ EMAIL_HOST = 'smtp.gmail.com'; EMAIL_USE_TLS = True; EMAIL_PORT = 587
 EMAIL_HOST_USER='schrodingernoreply@gmail.com'; EMAIL_HOST_PASSWORD='svya dujl eega xmjm'
 
 # MEDIA (IMGS OF models) SETTINGS
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/home/valucosmos/public_html/media/'
 MEDIA_URL = '/media/'
+# Manually charge ↑ ? idk if python manage.py collectstatic does media
