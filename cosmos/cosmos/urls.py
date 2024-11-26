@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from django.conf.urls import handler404, handler500, handler403, handler400
+#from django.conf.urls import handler404, handler500, handler403, handler400
 from django.conf import settings
 from cosmos.extra import *
 
@@ -32,4 +32,4 @@ urlpatterns = [
 
 
 #Error handers
-handler500 = custom_500_view; handler404 = custom_404_view; handler403 = custom_403_view; handler400 = custom_400_view
+#handler500 = custom_500_view; handler404 = custom_404_view; handler403 = custom_403_view; handler400 = custom_400_view
